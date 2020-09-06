@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.jgarnier.menuapplication.data.entity.*
 
+// TODO : Setup the database migration
 @Database(entities = [Food::class, FoodLine::class, Meal::class, Recipe::class, RecipeIngredient::class, Shop::class], version = 1, exportSchema = false)
 abstract class DailyMenuDatabase : RoomDatabase() {
 

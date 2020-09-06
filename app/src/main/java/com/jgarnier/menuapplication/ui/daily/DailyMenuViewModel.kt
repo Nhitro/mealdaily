@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui
+package com.jgarnier.menuapplication.ui.daily
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject

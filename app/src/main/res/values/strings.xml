@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Menus</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="daily_menu_lunch_title">Le midi : </string>
+    <string name="daily_menu_evening_title">Le soir : </string>
+</resources>

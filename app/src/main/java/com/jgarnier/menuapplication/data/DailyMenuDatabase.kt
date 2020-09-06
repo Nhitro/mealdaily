@@ -4,15 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.jgarnier.menuapplication.data.converter.Converters
 import com.jgarnier.menuapplication.data.entity.*
 
-// TODO : Setup the database migration
-@Database(entities = [Food::class, FoodLine::class, Meal::class, Recipe::class, RecipeIngredient::class, Shop::class], version = 1, exportSchema = false)
+@Database(entities = [Food::class, FoodLine::class, Meal::class, Recipe::class, RecipeIngredient::class, Shop::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class DailyMenuDatabase : RoomDatabase() {
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+
         @Volatile
         private var INSTANCE: DailyMenuDatabase? = null
 

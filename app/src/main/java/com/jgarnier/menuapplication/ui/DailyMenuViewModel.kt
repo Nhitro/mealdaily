@@ -6,6 +6,9 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
+/**
+ * ViewModel representing the state of [DailyMenuFragment]
+ */
 class DailyMenuViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel(), LifecycleObserver {

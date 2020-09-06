@@ -10,6 +10,9 @@ import com.jgarnier.menuapplication.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.daily_menu_fragment.*
 
+/**
+ * Fragment is in charge of showing the menu list
+ */
 @AndroidEntryPoint
 class DailyMenuFragment : Fragment() {
 

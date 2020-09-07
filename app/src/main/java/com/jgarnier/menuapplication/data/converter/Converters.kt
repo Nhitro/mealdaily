@@ -1,8 +1,8 @@
 package com.jgarnier.menuapplication.data.converter
 
 import androidx.room.TypeConverter
-import com.jgarnier.menuapplication.data.AmountSort
-import com.jgarnier.menuapplication.data.MealSort
+import com.jgarnier.menuapplication.data.raw.AmountSort
+import com.jgarnier.menuapplication.data.raw.MealSort
 import java.util.*
 
 class Converters {

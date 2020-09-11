@@ -2,8 +2,46 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "147d57d6e64cd848f6698e51e8688c2c",
+    "identityHash": "7334c9e4e0068b63a913a5041829c944",
     "entities": [
+      {
+        "tableName": "DailyMeal",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idDailyMeal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `dailyMealYear` INTEGER NOT NULL, `dailyMealMonth` INTEGER NOT NULL, `dailyMealDay` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idDailyMeal",
+            "columnName": "idDailyMeal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dailyMealYear",
+            "columnName": "dailyMealYear",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dailyMealMonth",
+            "columnName": "dailyMealMonth",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dailyMealDay",
+            "columnName": "dailyMealDay",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idDailyMeal"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
       {
         "tableName": "Food",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idFood` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `foodName` TEXT NOT NULL)",
@@ -32,7 +70,7 @@
       },
       {
         "tableName": "FoodLine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idFoodLine` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idMeal` INTEGER NOT NULL, `idFood` INTEGER NOT NULL, `amount` INTEGER NOT NULL, `amountSort` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idFoodLine` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idDailyMeal` INTEGER NOT NULL, `idFood` INTEGER NOT NULL, `amount` INTEGER NOT NULL, `amountSort` TEXT NOT NULL, `mealSort` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "idFoodLine",
@@ -41,8 +79,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "idMeal",
-            "columnName": "idMeal",
+            "fieldPath": "idDailyMeal",
+            "columnName": "idDailyMeal",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -63,6 +101,12 @@
             "columnName": "amountSort",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "mealSort",
+            "columnName": "mealSort",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -76,7 +120,7 @@
       },
       {
         "tableName": "Meal",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idMeal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mealDate` INTEGER NOT NULL, `mealSort` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idMeal` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `mealYear` INTEGER NOT NULL, `mealMonth` INTEGER NOT NULL, `mealDay` INTEGER NOT NULL, `mealSort` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "idMeal",
@@ -85,8 +129,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "mealDate",
-            "columnName": "mealDate",
+            "fieldPath": "mealYear",
+            "columnName": "mealYear",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mealMonth",
+            "columnName": "mealMonth",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mealDay",
+            "columnName": "mealDay",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -207,7 +263,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '147d57d6e64cd848f6698e51e8688c2c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7334c9e4e0068b63a913a5041829c944')"
     ]
   }
 }

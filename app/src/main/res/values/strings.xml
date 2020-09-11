@@ -2,6 +2,9 @@
     <string name="app_name">Menus</string>
     <string name="action_settings">Settings</string>
 
-    <string name="daily_menu_lunch_title">Le midi : </string>
-    <string name="daily_menu_evening_title">Le soir : </string>
+    <string name="daily_menu_lunch_title">Midi</string>
+    <string name="daily_menu_evening_title">Soir</string>
+    <string name="daily_menu_edit_button_text">modifier</string>
+    <string name="daily_menu_error_retry">rééssayer</string>
+    <string name="daily_menu_error_description">Une erreur est survenue lors de la récupération des menus</string>
 </resources>

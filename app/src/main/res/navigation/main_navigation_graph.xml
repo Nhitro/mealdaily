@@ -9,6 +9,25 @@
         android:id="@+id/dailyMenuFragment"
         android:name="com.jgarnier.menuapplication.ui.daily.DailyMenuFragment"
         tools:layout="@layout/daily_menu_fragment"
-        android:label="DailyMenuFragment" />
+        android:label="DailyMenuFragment" >
+        <action
+            android:id="@+id/action_dailyMenuFragment_to_detailMenuFragment"
+            app:destination="@id/detailMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMenuFragment"
+        android:name="com.jgarnier.menuapplication.ui.detail.DetailMenuFragment"
+        android:label="detail_menu_fragment"
+        tools:layout="@layout/detail_menu_fragment" >
+        <argument
+            android:name="selectedDay"
+            app:argType="integer" />
+        <argument
+            android:name="selectedMonth"
+            app:argType="integer" />
+        <argument
+            android:name="selectedYear"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

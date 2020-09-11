@@ -24,11 +24,12 @@ class DailyMenuViewModel @ViewModelInject constructor(
 
     val dailyMenuState = DailyMenuState.dailyMenuLoadingState()
 
-    private var lastLocalDate = LocalDate.now()
+    var selectedDate: LocalDate = LocalDate.now()
 
-    fun retryFetchMeal() = fetchMealAccording(lastLocalDate)
+    fun retryFetchMeal() = fetchMealAccording(selectedDate)
 
     fun fetchMealAccording(localDate: LocalDate) {
+        selectedDate = localDate
         dailyMenuState.isLoading()
 
         viewModelScope.launch {
@@ -36,7 +37,6 @@ class DailyMenuViewModel @ViewModelInject constructor(
             dailyMealRepository
                 .getDailyMealAccording(localDate)
                 .catch {
-                    lastLocalDate = localDate
                     dailyMenuState.encounteredError()
                 }
                 .collect {

@@ -56,7 +56,13 @@ class DailyMenuFragment : Fragment() {
             // Add callback in order to perform ChangeText() transition each time binding values change
             addOnRebindCallback(object : OnRebindCallback<DailyMenuFragmentBinding>() {
                 override fun onPreBind(binding: DailyMenuFragmentBinding?): Boolean {
-                    TransitionManager.beginDelayedTransition(binding?.dailyMenuCardContainer as ViewGroup, ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT_IN))
+                    TransitionManager
+                        .beginDelayedTransition(
+                            binding?.dailyMenuCardContainer as ViewGroup,
+                            ChangeText()
+                                .setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT_IN)
+                                .setDuration(100)
+                        )
                     return super.onPreBind(binding)
                 }
             })

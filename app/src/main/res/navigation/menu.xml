@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_menu"
+    app:startDestination="@id/menuFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_menu.MenuFragment"
+        android:label="menu_fragment"
+        tools:layout="@layout/menu_fragment" />
+
+</navigation>

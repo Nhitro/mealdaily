@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_planning"
+    app:startDestination="@id/planningFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/planningFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.PlanningFragment"
+        android:label="planning_fragment"
+        tools:layout="@layout/planning_fragment">
+
+        <action
+            android:id="@+id/action_planningFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" />
+
+        <action
+            android:id="@+id/action_planningFragment_to_searchMenuFragment"
+            app:destination="@id/searchMenuFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuDetailFragment"
+        android:name="com.jgarnier.menuapplication.ui.menu_detail.MenuDetailFragment"
+        android:label="menu_detail_fragment"
+        tools:layout="@layout/menu_detail_fragment" />
+
+    <fragment
+        android:id="@+id/searchMenuFragment"
+        android:name="com.jgarnier.menuapplication.ui.menu_search.SearchMenuFragment"
+        android:label="search_menu_fragment"
+        tools:layout="@layout/search_menu_fragment">
+
+        <action
+            android:id="@+id/action_searchMenuFragment_to_menuFormFragment"
+            app:destination="@id/menuFormFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFormFragment"
+        android:name="com.jgarnier.menuapplication.ui.menu_form.MenuFormFragment"
+        android:label="menu_form_fragment"
+        tools:layout="@layout/menu_form_fragment" />
+
+</navigation>

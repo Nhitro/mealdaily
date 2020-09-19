@@ -7,4 +7,7 @@
     <string name="daily_menu_edit_button_text">modifier</string>
     <string name="daily_menu_error_retry">rééssayer</string>
     <string name="daily_menu_error_description">Une erreur est survenue lors de la récupération des menus</string>
+    <string name="tab_planning_title">Planning</string>
+    <string name="tab_menus_title">Menus</string>
+    <string name="tab_shopping_title">Course</string>
 </resources>

@@ -4,16 +4,19 @@
     <item
         android:id="@+id/tab_planning"
         android:enabled="true"
+        android:icon="@drawable/ic_round_calendar_today_24"
         android:title="@string/tab_planning_title" />
 
     <item
         android:id="@+id/tab_menu"
         android:enabled="true"
+        android:icon="@drawable/ic_round_menu_book_24"
         android:title="@string/tab_menus_title" />
 
     <item
         android:id="@+id/tab_shopping_list"
         android:enabled="true"
+        android:icon="@drawable/ic_round_shopping_cart_24"
         android:title="@string/tab_shopping_title" />
 
 </menu>

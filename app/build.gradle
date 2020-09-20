@@ -59,6 +59,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt 'com.android.databinding:compiler:3.1.4'
 
+    // Utils
+    implementation "com.kirich1409.viewbindingpropertydelegate:viewbindingpropertydelegate:$view_binding_property_delegate_version"
+
     // Material
     implementation "com.google.android.material:material:$materialVersion"
 

@@ -78,12 +78,13 @@
 
         </ViewFlipper>
 
-        <View
-            android:background="@color/sunrise_yellow"
-            app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/day_meals"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/holder_day_meal"
             android:layout_width="0dp"
             android:layout_height="0dp" />
 

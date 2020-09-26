@@ -29,7 +29,7 @@ class WeekAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekDateViewHolder {
         return WeekDateViewHolder(
-            mSelectDateConsumer.andThen { selectWeekDate(it) },
+            Consumer<WeekDate> { selectWeekDate(it) }.andThen(mSelectDateConsumer),
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.holder_week_date, parent, false)

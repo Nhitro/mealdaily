@@ -42,7 +42,7 @@ class WeekAdapter(
      * Call this method when you want to change which cell is selected after a click
      */
     private fun selectWeekDate(weekDate: WeekDate) {
-        if (weekDate != mLastSelectedWeekDate) {
+        if (!weekDate.localDate.isEqual(mLastSelectedWeekDate.localDate)) {
             // Keep the old index in order to reset the old selected cell
             val oldIndex = mLastSelectedWeekDate.position
 

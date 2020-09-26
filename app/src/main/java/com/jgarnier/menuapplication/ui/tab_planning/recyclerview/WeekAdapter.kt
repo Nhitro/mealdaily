@@ -15,11 +15,17 @@ class WeekAdapter(
     private val mSelectDateConsumer: Consumer<WeekDate>
 ) : RecyclerView.Adapter<WeekDateViewHolder>() {
 
-    val localDateNowIndex: Int = itemCount / 2
+    companion object {
+        // Represents one century
+        const val MAX_LENGTH = 36500;
+    }
+
+    // The current date is at the middle of the list
+    val localDateNowIndex: Int = MAX_LENGTH / 2
 
     private var mLastSelectedWeekDate = WeekDate(mLocalDateNow, localDateNowIndex, true)
 
-    override fun getItemCount(): Int = Integer.MAX_VALUE
+    override fun getItemCount(): Int = MAX_LENGTH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekDateViewHolder {
         return WeekDateViewHolder(

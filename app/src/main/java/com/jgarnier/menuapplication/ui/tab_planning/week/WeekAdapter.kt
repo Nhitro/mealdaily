@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning.recyclerview
+package com.jgarnier.menuapplication.ui.tab_planning.week
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -31,7 +31,7 @@ class WeekDateViewHolder(private val mSelectWeekDateConsumer: Consumer<WeekDate>
         mBinding.dayLayout.setBackgroundColor(
             itemView.context.getColor(
                 if (weekDate.isSelected) {
-                    R.color.primaryColor
+                    R.color.vert_pomme
                 } else {
                     android.R.color.white
                 }

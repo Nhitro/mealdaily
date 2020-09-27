@@ -7,8 +7,7 @@
         android:id="@+id/day_meal_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardBackgroundColor="@color/sunrise_yellow">
+        android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,13 +24,12 @@
                 android:padding="4dp"
                 android:rotation="-90"
                 android:textAllCaps="true"
-                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="encas" />
+                tools:text="matin" />
 
             <View
                 android:id="@+id/day_meal_line"

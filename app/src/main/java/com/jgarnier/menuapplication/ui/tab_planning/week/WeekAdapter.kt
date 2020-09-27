@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgarnier.menuapplication.R
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.function.Consumer
 
 /**
@@ -41,6 +42,22 @@ class WeekAdapter(
 
         holder.update(
             WeekDate(localDate, position, localDate == mLastSelectedWeekDate.localDate)
+        )
+    }
+
+    fun getSelectedPosition() = mLastSelectedWeekDate.position
+
+    fun selectDate(recyclerView: RecyclerView, localDate: LocalDate) {
+        val position = localDateNowIndex + ChronoUnit.DAYS.between(mLocalDateNow, localDate).toInt()
+
+        recyclerView.scrollToPosition(position)
+
+        selectWeekDate(
+            WeekDate(
+                localDate,
+                position,
+                true
+            )
         )
     }
 

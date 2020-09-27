@@ -15,11 +15,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="center"
             android:textSize="19sp"
             android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@id/planning_calendar_flipper"
             app:layout_constraintEnd_toStartOf="@id/planning_calendar_button_group"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,13 +83,27 @@
         </ViewFlipper>
 
         <View
-            app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper"
-            app:layout_constraintStart_toStartOf="@id/planning_calendar_flipper"
-            app:layout_constraintEnd_toEndOf="@id/planning_calendar_flipper"
-            android:background="@drawable/planning_gradient_background"
             android:id="@+id/days_line"
             android:layout_width="0dp"
-            android:layout_height="1dp" />
+            android:layout_height="1dp"
+            android:background="@drawable/planning_gradient_background"
+            app:layout_constraintEnd_toEndOf="@id/planning_calendar_flipper"
+            app:layout_constraintStart_toStartOf="@id/planning_calendar_flipper"
+            app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper" />
+
+        <TextView
+            android:id="@+id/day_meals_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_no_meals_label"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/day_meals"
+            app:layout_constraintEnd_toEndOf="@id/day_meals"
+            app:layout_constraintStart_toStartOf="@id/day_meals"
+            app:layout_constraintTop_toTopOf="@id/day_meals"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/day_meals"
@@ -101,7 +115,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper"
+            tools:itemCount="1"
             tools:listitem="@layout/holder_day_meal" />
+
 
         <ProgressBar
             android:id="@+id/day_meals_loader"
@@ -112,6 +128,19 @@
             app:layout_constraintEnd_toEndOf="@id/day_meals"
             app:layout_constraintStart_toStartOf="@id/day_meals"
             app:layout_constraintTop_toTopOf="@id/day_meals" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/planning_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_round_add_24"
+            app:backgroundTint="@color/fraise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

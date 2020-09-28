@@ -9,7 +9,7 @@ fun CalendarView.setLocalDate(localDate: LocalDate, animate: Boolean, center: Bo
         localDate.atStartOfDay()
             .toInstant(ZoneOffset.UTC)
             .toEpochMilli(),
-        false,
-        true
+        animate,
+        center
     )
 }

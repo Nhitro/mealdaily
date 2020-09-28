@@ -20,6 +20,10 @@
             android:id="@+id/action_planningFragment_to_searchMenuFragment"
             app:destination="@id/searchMenuFragment" />
 
+        <action
+            android:id="@+id/action_planningFragment_to_mealDialogFragment"
+            app:destination="@id/mealDialogFragment" />
+
     </fragment>
 
     <fragment
@@ -45,5 +49,10 @@
         android:name="com.jgarnier.menuapplication.ui.menu_form.MenuFormFragment"
         android:label="menu_form_fragment"
         tools:layout="@layout/menu_form_fragment" />
+
+    <dialog
+        android:id="@+id/mealDialogFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdialog.MealDialogFragment"
+        android:label="MealDialogFragment" />
 
 </navigation>

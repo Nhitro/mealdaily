@@ -2,10 +2,12 @@ package com.jgarnier.menuapplication.ui.tab_planning.mealdialog
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jgarnier.menuapplication.R
@@ -49,6 +51,10 @@ class MealDialogFragment : DialogFragment() {
             builder.setNegativeButton(R.string.dialog_cancel_label) { _, _ -> dismiss() }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mViewModel.closeDialog.observe(viewLifecycleOwner, Observer { if (it) dismiss() })
     }
 
     private fun createRadioButton(mealSort: MealSort): RadioButton {

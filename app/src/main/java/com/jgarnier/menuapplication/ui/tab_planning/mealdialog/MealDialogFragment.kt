@@ -33,6 +33,11 @@ class MealDialogFragment : DialogFragment() {
             }
 
             databinding.mealDialogRadioGroup.check(MealSort.BREAK_FAST.ordinal)
+            databinding.mealDialogRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                mViewModel.selectMeal(
+                    MealSort.values()[checkedId]
+                )
+            }
 
             builder.setTitle(R.string.meal_dialog_title)
             builder.setView(rootView)

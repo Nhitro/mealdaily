@@ -13,7 +13,7 @@
             android:background="@drawable/planning_gradient_background" />
 
         <RadioGroup
-            android:id="@+id/dialog_radio_group"
+            android:id="@+id/meal_dialog_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="18dp" />

@@ -118,7 +118,6 @@
             tools:itemCount="1"
             tools:listitem="@layout/holder_day_meal" />
 
-
         <ProgressBar
             android:id="@+id/day_meals_loader"
             android:layout_width="wrap_content"

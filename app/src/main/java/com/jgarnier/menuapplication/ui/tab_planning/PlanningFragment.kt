@@ -75,7 +75,10 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
         }
 
         mBinding.planningFab.setOnClickListener {
-            findNavController().navigate(PlanningFragmentDirections.actionPlanningFragmentToMealDialogFragment())
+            val action = PlanningFragmentDirections.actionPlanningFragmentToMealDialogFragment(
+                mSelectedDate ?: LocalDate.now()
+            )
+            findNavController().navigate(action)
         }
 
         // View Model observation

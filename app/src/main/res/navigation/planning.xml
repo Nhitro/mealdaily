@@ -30,7 +30,7 @@
         android:id="@+id/menuDetailFragment"
         android:name="com.jgarnier.menuapplication.ui.menu_detail.MenuDetailFragment"
         android:label="menu_detail_fragment"
-        tools:layout="@layout/menu_detail_fragment" />
+        tools:layout="@layout/menu_detail_fragment"></fragment>
 
     <fragment
         android:id="@+id/searchMenuFragment"
@@ -53,6 +53,12 @@
     <dialog
         android:id="@+id/mealDialogFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdialog.MealDialogFragment"
-        android:label="MealDialogFragment" />
+        android:label="MealDialogFragment">
+
+        <argument
+            android:name="selectedDate"
+            app:argType="java.time.LocalDate" />
+
+    </dialog>
 
 </navigation>

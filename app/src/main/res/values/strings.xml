@@ -17,4 +17,17 @@
     <string name="meal_dinner">DINER</string>
     <string name="meal_snack">ENCAS</string>
     <string name="day_no_meals_label">Aucun repas n\'a été trouvé</string>
+
+    <string name="meal_dialog_title">Ajout d\'un repas</string>
+
+    <string name="dialog_validate_label">valider</string>
+    <string name="dialog_cancel_label">annuler</string>
+
+    <string-array name="meals_array">
+        <item>Petit déjeuner</item>
+        <item>Déjeuner</item>
+        <item>Encas</item>
+        <item>Dîner</item>
+    </string-array>
+
 </resources>

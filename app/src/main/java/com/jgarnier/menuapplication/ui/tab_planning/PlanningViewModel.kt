@@ -2,24 +2,28 @@ package com.jgarnier.menuapplication.ui.tab_planning
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.Result.Loading
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.repository.MealRepository
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
 /**
  * Represents the state of [PlanningFragment]
  */
+@FlowPreview
+@ExperimentalCoroutinesApi
 class PlanningViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val mealRepository: MealRepository
+    private val mMealRepository: MealRepository
 ) : ViewModel() {
 
     companion object {
@@ -30,14 +34,37 @@ class PlanningViewModel @ViewModelInject constructor(
         const val WEEK_DAY_VIEW = 2
     }
 
-    val selectedLocalDate: MutableLiveData<LocalDate>
-    val currentTypeView: MutableLiveData<Int>
-    val mealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>>
+    private val mSelectedLocalDate: MutableLiveData<LocalDate>
+
+    private val mCurrentTypeView: MutableLiveData<Int>
+
+    private val mMealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>>
+
+    private val mFetchDateChannel = ConflatedBroadcastChannel<LocalDate>()
+
+    val selectedLocalDate: LiveData<LocalDate>
+        get() = mSelectedLocalDate
+
+    val currentTypeView: LiveData<Int>
+        get() = mCurrentTypeView
+
+    val mealWithDishes =
+        mFetchDateChannel
+            .asFlow()
+            .flatMapLatest { date ->
+                mMealRepository.getDailyMealAccording(date)
+            }
+            .map { value ->
+                Result.Success(value)
+            }
+            .catch { cause -> Result.Error<List<MealWithDishes>>(cause.message) }
+            .asLiveData()
 
     init {
-        selectedLocalDate = savedStateHandle.get<MutableLiveData<LocalDate>>(LAST_DATE)
+        mSelectedLocalDate = savedStateHandle.get<MutableLiveData<LocalDate>>(LAST_DATE)
             ?: MutableLiveData(LocalDate.now())
-        currentTypeView =
+
+        mCurrentTypeView =
             savedStateHandle.get<MutableLiveData<Int>>(TYPE_OF_VIEW) ?: MutableLiveData(
                 WEEK_DAY_VIEW
             )
@@ -46,35 +73,30 @@ class PlanningViewModel @ViewModelInject constructor(
             savedStateHandle.get<MutableLiveData<Result<List<MealWithDishes>>>>(MEAL_AND_DISHES)
 
         if (savedMealWithDishes == null) {
-            mealWithDishesList = MutableLiveData(Loading())
-            userSelectedDate(selectedLocalDate.value!!)
+            mMealWithDishesList = MutableLiveData(Loading())
+            userSelectedDate(mSelectedLocalDate.value!!)
         } else {
-            mealWithDishesList = savedMealWithDishes
+            mMealWithDishesList = savedMealWithDishes
         }
     }
 
     override fun onCleared() {
-        savedStateHandle.set(TYPE_OF_VIEW, currentTypeView)
-        savedStateHandle.set(MEAL_AND_DISHES, mealWithDishesList)
-        savedStateHandle.set(LAST_DATE, selectedLocalDate)
+        savedStateHandle.set(TYPE_OF_VIEW, mCurrentTypeView)
+        savedStateHandle.set(MEAL_AND_DISHES, mMealWithDishesList)
+        savedStateHandle.set(LAST_DATE, mSelectedLocalDate)
     }
 
     fun userSelectedDate(localDate: LocalDate) {
-        selectedLocalDate.postValue(localDate)
-
-        viewModelScope.launch {
-            mealRepository
-                .getDailyMealAccording(localDate)
-                .collect { mealWithDishesList.postValue(Result.Success(it)) }
-        }
+        mSelectedLocalDate.postValue(localDate)
+        mFetchDateChannel.offer(localDate)
     }
 
     fun selectWeekView() = postTypeViewIfDifferent(WEEK_DAY_VIEW)
     fun selectMonthView() = postTypeViewIfDifferent(CALENDAR_VIEW)
 
     private fun postTypeViewIfDifferent(typeView: Int) {
-        if (currentTypeView.value != null && currentTypeView.value != typeView) {
-            currentTypeView.postValue(typeView)
+        if (mCurrentTypeView.value != null && mCurrentTypeView.value != typeView) {
+            mCurrentTypeView.postValue(typeView)
         }
     }
 

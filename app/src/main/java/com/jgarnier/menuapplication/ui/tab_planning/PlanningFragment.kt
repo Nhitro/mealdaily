@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.transition.MaterialFade
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
@@ -18,8 +19,9 @@ import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import com.jgarnier.menuapplication.ui.tab_planning.PlanningViewModel.Companion.CALENDAR_VIEW
 import com.jgarnier.menuapplication.ui.tab_planning.meals.MealsAdapter
 import com.jgarnier.menuapplication.ui.tab_planning.week.WeekAdapter
-import com.transitionseverywhere.ChangeText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.function.Consumer
@@ -27,6 +29,8 @@ import java.util.function.Consumer
 /**
  * This fragment is in charge of showing the meals according to a date within the calendar or the week days list
  */
+@ExperimentalCoroutinesApi
+@FlowPreview
 @AndroidEntryPoint
 class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
 
@@ -43,6 +47,7 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
     ): View? {
         return inflater.inflate(R.layout.planning_fragment, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,7 +89,7 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
         // View Model observation
         mViewModel.selectedLocalDate.observe(viewLifecycleOwner, observeSelectedLocalDate(adapter))
         mViewModel.currentTypeView.observe(viewLifecycleOwner, observeCurrentTypeView())
-        mViewModel.mealWithDishesList.observe(viewLifecycleOwner, observeMealWithDishesResult())
+        mViewModel.mealWithDishes.observe(viewLifecycleOwner, observeMealWithDishesResult())
     }
 
     private fun observeSelectedLocalDate(adapter: WeekAdapter): Observer<LocalDate> {
@@ -96,12 +101,6 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
             // Update calendar view if needed
             mBinding.planningDaysCalendar.setLocalDate(it, animate = false, center = true)
 
-            TransitionManager.beginDelayedTransition(
-                mBinding.planningLayout as ViewGroup,
-                ChangeText()
-                    .setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT_IN)
-                    .setDuration(250)
-            )
             // Update text
             mBinding.planningCurrentDayLabel.text = getCapitalizeDate(it)
         }
@@ -122,6 +121,9 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
     }
 
     private fun observeMealWithDishesResult(): Observer<Result<List<MealWithDishes>>> {
+        val adapter = MealsAdapter()
+        mBinding.dayMeals.adapter = adapter
+
         return Observer {
             it?.apply {
                 if (it is Result.Loading) {
@@ -129,14 +131,20 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
                     mBinding.dayMeals.visibility = View.INVISIBLE
                 } else {
                     mBinding.dayMealsLoader.visibility = View.GONE
-                    mBinding.dayMeals.visibility = View.VISIBLE
-
                     if (it.data != null && it.data.isNotEmpty()) {
+                        adapter.updateList(mSelectedDate, it.data)
                         mBinding.dayMealsInformation.visibility = View.GONE
-                        mBinding.dayMeals.adapter = MealsAdapter(it.data)
+                        mBinding.dayMeals.visibility = View.VISIBLE
                     } else {
+                        mBinding.dayMeals.visibility = View.GONE
                         mBinding.dayMealsInformation.visibility = View.VISIBLE
+                        adapter.updateList(mSelectedDate, null)
                     }
+
+                    TransitionManager.beginDelayedTransition(
+                        mBinding.planningLayout,
+                        MaterialFade()
+                    )
                 }
             }
         }

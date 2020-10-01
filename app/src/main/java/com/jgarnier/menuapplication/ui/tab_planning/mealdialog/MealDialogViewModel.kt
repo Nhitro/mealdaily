@@ -2,10 +2,7 @@ package com.jgarnier.menuapplication.ui.tab_planning.mealdialog
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.jgarnier.menuapplication.data.raw.MealSort
 import com.jgarnier.menuapplication.data.repository.MealRepository
 import kotlinx.coroutines.launch
@@ -16,9 +13,11 @@ class MealDialogViewModel @ViewModelInject constructor(
     private val mealRepository: MealRepository
 ) : ViewModel() {
 
-    val closeDialog: MutableLiveData<Boolean> = MutableLiveData(false)
-
     private var mSelectedMealSort = MealSort.BREAK_FAST
+    private val mCloseDialog: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val closeDialog: LiveData<Boolean>
+        get() = mCloseDialog
 
     fun insert(localDate: LocalDate) {
         viewModelScope.launch {

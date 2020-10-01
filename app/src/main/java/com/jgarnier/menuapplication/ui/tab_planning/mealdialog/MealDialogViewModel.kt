@@ -22,8 +22,8 @@ class MealDialogViewModel @ViewModelInject constructor(
     fun insert(localDate: LocalDate) {
         viewModelScope.launch {
             val order = mealRepository.getLastMealOrderOf(localDate) ?: 0
-            mealRepository.insert(localDate, order, mSelectedMealSort)
-            closeDialog.postValue(true)
+            mealRepository.insert(localDate, order + 1, mSelectedMealSort)
+            mCloseDialog.postValue(true)
         }
     }
 

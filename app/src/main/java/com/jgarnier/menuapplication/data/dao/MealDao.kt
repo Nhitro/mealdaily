@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface MealDao {
 
     @Insert
-    suspend fun insert(meal: Meal)
+    fun insert(meal: Meal)
 
     @Transaction
     @Query("SELECT * FROM Meal WHERE mealDay = :day AND mealMonth = :month AND mealYear = :year")

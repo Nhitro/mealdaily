@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
+import java.time.LocalDate
 
-class MealsAdapter(private val mealsWithDishes: List<MealWithDishes>) :
-    RecyclerView.Adapter<MealViewHolder>() {
+class MealsAdapter : RecyclerView.Adapter<MealViewHolder>() {
 
-    override fun getItemCount() = mealsWithDishes.size
+    private val mMealWithDishes = ArrayList<MealWithDishes>()
+
+    private var mSelectedDate: LocalDate? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(
@@ -18,7 +20,27 @@ class MealsAdapter(private val mealsWithDishes: List<MealWithDishes>) :
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
-        holder.update(mealsWithDishes[position])
+        holder.update(mMealWithDishes[position])
+    }
+
+    override fun getItemCount() = mMealWithDishes.size
+
+    fun updateList(selectedDate: LocalDate?, newMealsWithDishes: List<MealWithDishes>?) {
+        if (mMealWithDishes.isNotEmpty() && newMealsWithDishes.isNullOrEmpty()) {
+            mMealWithDishes.clear()
+            notifyDataSetChanged()
+        } else if (newMealsWithDishes != null) {
+            selectedDate?.apply {
+                mMealWithDishes.clear()
+                mMealWithDishes.addAll(newMealsWithDishes)
+                if (this != mSelectedDate) {
+                    notifyDataSetChanged()
+                } else {
+                    notifyItemInserted(mMealWithDishes.size - 1)
+                }
+                mSelectedDate = this
+            }
+        }
     }
 
 }

@@ -26,10 +26,10 @@ class MealsAdapter : RecyclerView.Adapter<MealViewHolder>() {
     override fun getItemCount() = mMealWithDishes.size
 
     fun updateList(selectedDate: LocalDate?, newMealsWithDishes: List<MealWithDishes>?) {
-        if (mMealWithDishes.isNotEmpty() && newMealsWithDishes.isNullOrEmpty()) {
+        if (newMealsWithDishes.isNullOrEmpty()) {
             mMealWithDishes.clear()
             notifyDataSetChanged()
-        } else if (newMealsWithDishes != null) {
+        } else {
             selectedDate?.apply {
                 mMealWithDishes.clear()
                 mMealWithDishes.addAll(newMealsWithDishes)

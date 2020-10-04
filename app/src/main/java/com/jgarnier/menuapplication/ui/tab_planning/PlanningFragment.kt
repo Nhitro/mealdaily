@@ -13,7 +13,7 @@ import com.google.android.material.transition.MaterialFade
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
-import com.jgarnier.menuapplication.databinding.PlanningFragmentBinding
+import com.jgarnier.menuapplication.databinding.FragmentPlanningBinding
 import com.jgarnier.menuapplication.setLocalDate
 import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import com.jgarnier.menuapplication.ui.tab_planning.PlanningViewModel.Companion.CALENDAR_VIEW
@@ -32,11 +32,11 @@ import java.util.function.Consumer
 @ExperimentalCoroutinesApi
 @FlowPreview
 @AndroidEntryPoint
-class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
+class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
 
     private val mViewModel: PlanningViewModel by viewModels()
 
-    private val mBinding: PlanningFragmentBinding by viewBinding()
+    private val mBinding: FragmentPlanningBinding by viewBinding()
 
     private var mSelectedDate: LocalDate? = null
 
@@ -45,7 +45,7 @@ class PlanningFragment : TransitionFragment(R.layout.planning_fragment) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.planning_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_planning, container, false)
     }
 
 

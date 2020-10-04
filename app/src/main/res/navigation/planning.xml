@@ -10,7 +10,7 @@
         android:id="@+id/planningFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_planning.PlanningFragment"
         android:label="planning_fragment"
-        tools:layout="@layout/planning_fragment">
+        tools:layout="@layout/fragment_planning">
 
         <action
             android:id="@+id/action_planningFragment_to_menuDetailFragment"
@@ -28,9 +28,9 @@
 
     <fragment
         android:id="@+id/menuDetailFragment"
-        android:name="com.jgarnier.menuapplication.ui.menu_detail.MenuDetailFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MenuDetailFragment"
         android:label="menu_detail_fragment"
-        tools:layout="@layout/menu_detail_fragment"></fragment>
+        tools:layout="@layout/fragment_meal_detail"></fragment>
 
     <fragment
         android:id="@+id/searchMenuFragment"

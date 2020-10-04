@@ -10,6 +10,6 @@
         android:id="@+id/menuFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_menu.MenuFragment"
         android:label="menu_fragment"
-        tools:layout="@layout/menu_fragment" />
+        tools:layout="@layout/fragment_menus" />
 
 </navigation>

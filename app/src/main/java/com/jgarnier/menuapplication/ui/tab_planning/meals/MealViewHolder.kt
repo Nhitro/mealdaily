@@ -6,8 +6,12 @@ import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.raw.MealSort
 import com.jgarnier.menuapplication.databinding.HolderDayMealBinding
+import java.util.function.Consumer
 
-class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class MealViewHolder(
+    private val mUserClickedOnMeal: Consumer<MealWithDishes>,
+    itemView: View
+) : RecyclerView.ViewHolder(itemView) {
 
     private val mBinding = HolderDayMealBinding.bind(itemView)
 
@@ -21,6 +25,8 @@ class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 backgroundColorAccordingMealSort(mealSort)
             )
         )
+
+        mBinding.dayMealCard.setOnClickListener { mUserClickedOnMeal.accept(mealWithDishes) }
         mBinding.dayMealName.text = context.getText(textAccordingMealSort(mealSort))
 
         if (dishes.isNotEmpty()) {

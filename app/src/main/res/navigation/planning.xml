@@ -30,7 +30,20 @@
         android:id="@+id/menuDetailFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MenuDetailFragment"
         android:label="menu_detail_fragment"
-        tools:layout="@layout/fragment_meal_detail"></fragment>
+        tools:layout="@layout/fragment_meal_detail">
+        <argument
+            android:name="day"
+            app:argType="integer" />
+        <argument
+            android:name="month"
+            app:argType="integer" />
+        <argument
+            android:name="year"
+            app:argType="integer" />
+        <argument
+            android:name="mealSort"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchMenuFragment"

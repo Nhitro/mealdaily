@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import java.time.LocalDate
+import java.util.function.Consumer
 
-class MealsAdapter : RecyclerView.Adapter<MealViewHolder>() {
+class MealsAdapter(private val mUserClickedOnMeal: Consumer<MealWithDishes>) :
+    RecyclerView.Adapter<MealViewHolder>() {
 
     private val mMealWithDishes = ArrayList<MealWithDishes>()
 
@@ -15,6 +17,7 @@ class MealsAdapter : RecyclerView.Adapter<MealViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(
+            mUserClickedOnMeal,
             LayoutInflater.from(parent.context).inflate(R.layout.holder_day_meal, parent, false)
         )
     }

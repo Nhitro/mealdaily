@@ -121,7 +121,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
     }
 
     private fun observeMealWithDishesResult(): Observer<Result<List<MealWithDishes>>> {
-        val adapter = MealsAdapter()
+        val adapter = MealsAdapter(userClickedOnMeal())
         mBinding.dayMeals.adapter = adapter
 
         return Observer {
@@ -147,6 +147,21 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
                         MaterialFade()
                     )
                 }
+            }
+        }
+    }
+
+    /**
+     * Navigate to meal detail on user click
+     */
+    private fun userClickedOnMeal(): Consumer<MealWithDishes> {
+        return Consumer {
+            it.meal.apply {
+                val action = PlanningFragmentDirections.actionPlanningFragmentToMenuDetailFragment(
+                    mealDay, mealMonth, mealYear, mealSort.name
+                )
+
+                findNavController().navigate(action)
             }
         }
     }

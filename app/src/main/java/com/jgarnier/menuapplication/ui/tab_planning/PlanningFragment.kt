@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.transition.TransitionManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.transition.MaterialFade
@@ -18,6 +19,7 @@ import com.jgarnier.menuapplication.setLocalDate
 import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import com.jgarnier.menuapplication.ui.tab_planning.PlanningViewModel.Companion.CALENDAR_VIEW
 import com.jgarnier.menuapplication.ui.tab_planning.meals.MealsAdapter
+import com.jgarnier.menuapplication.ui.tab_planning.meals.MealsMoveCallback
 import com.jgarnier.menuapplication.ui.tab_planning.week.WeekAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -122,6 +124,8 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
 
     private fun observeMealWithDishesResult(): Observer<Result<List<MealWithDishes>>> {
         val adapter = MealsAdapter(userClickedOnMeal())
+        val mealsMoveTouchHelper = ItemTouchHelper(MealsMoveCallback(adapter))
+        mealsMoveTouchHelper.attachToRecyclerView(mBinding.dayMeals)
         mBinding.dayMeals.adapter = adapter
 
         return Observer {

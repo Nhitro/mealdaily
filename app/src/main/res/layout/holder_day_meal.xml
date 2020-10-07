@@ -15,13 +15,9 @@
 
             <TextView
                 android:id="@+id/day_meal_name"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:gravity="center"
-                android:padding="4dp"
                 android:rotation="-90"
                 android:textAllCaps="true"
                 android:textSize="16sp"

@@ -20,7 +20,7 @@ class MealViewHolder(
         val dishes = mealWithDishes.dishes
         val mealSort = mealWithDishes.meal.mealSort
 
-        mBinding.dayMealCard.setCardBackgroundColor(
+        mBinding.dayMealName.setBackgroundColor(
             context.getColor(
                 backgroundColorAccordingMealSort(mealSort)
             )

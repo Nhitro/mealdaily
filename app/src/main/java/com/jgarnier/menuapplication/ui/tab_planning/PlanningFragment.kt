@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.transition.TransitionManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.transition.MaterialFade
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
@@ -141,15 +140,10 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
                         mBinding.dayMealsInformation.visibility = View.GONE
                         mBinding.dayMeals.visibility = View.VISIBLE
                     } else {
-                        mBinding.dayMeals.visibility = View.GONE
+                        mBinding.dayMeals.visibility = View.INVISIBLE
                         mBinding.dayMealsInformation.visibility = View.VISIBLE
                         adapter.updateList(mSelectedDate, null)
                     }
-
-                    TransitionManager.beginDelayedTransition(
-                        mBinding.planningLayout,
-                        MaterialFade()
-                    )
                 }
             }
         }

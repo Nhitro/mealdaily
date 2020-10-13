@@ -1,19 +1,19 @@
 package com.jgarnier.menuapplication.ui.tab_planning
 
+import android.app.Application
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.Result.Loading
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.repository.MealRepository
+import com.jgarnier.menuapplication.ui.base.AbstractListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
 /**
@@ -22,9 +22,10 @@ import java.time.LocalDate
 @FlowPreview
 @ExperimentalCoroutinesApi
 class PlanningViewModel @ViewModelInject constructor(
+    application: Application,
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val mMealRepository: MealRepository
-) : ViewModel() {
+) : AbstractListViewModel<LocalDate, MealWithDishes>(application) {
 
     companion object {
         private const val LAST_DATE = "last_date_key_bundle"
@@ -47,18 +48,6 @@ class PlanningViewModel @ViewModelInject constructor(
 
     val currentTypeView: LiveData<Int>
         get() = mCurrentTypeView
-
-    val mealWithDishes =
-        mFetchDateChannel
-            .asFlow()
-            .flatMapLatest { date ->
-                mMealRepository.getDailyMealAccording(date)
-            }
-            .map { value ->
-                Result.Success(value)
-            }
-            .catch { cause -> Result.Error<List<MealWithDishes>>(cause.message) }
-            .asLiveData()
 
     init {
         mSelectedLocalDate = savedStateHandle.get<MutableLiveData<LocalDate>>(LAST_DATE)
@@ -99,5 +88,8 @@ class PlanningViewModel @ViewModelInject constructor(
             mCurrentTypeView.postValue(typeView)
         }
     }
+
+    override suspend fun fetchData(filterObject: LocalDate) =
+        mMealRepository.getDailyMealAccording(filterObject)
 
 }

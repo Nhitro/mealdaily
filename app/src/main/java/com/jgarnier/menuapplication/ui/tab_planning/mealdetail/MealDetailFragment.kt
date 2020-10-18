@@ -1,20 +1,22 @@
 package com.jgarnier.menuapplication.ui.tab_planning.mealdetail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jgarnier.menuapplication.R
+import com.jgarnier.menuapplication.databinding.FragmentDetailMenuBinding
+import com.jgarnier.menuapplication.ui.base.TransitionFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class MenuDetailFragment : Fragment() {
+@AndroidEntryPoint
+class MenuDetailFragment : TransitionFragment(R.layout.fragment_detail_menu) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_meal_detail, container, false)
+    private val mViewModel: MealDetailViewModel by viewModels()
+
+    private val mBinding: FragmentDetailMenuBinding by viewBinding()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
-
 }

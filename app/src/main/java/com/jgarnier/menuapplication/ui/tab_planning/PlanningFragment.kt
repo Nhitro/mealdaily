@@ -90,7 +90,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         // View Model observation
         mViewModel.selectedLocalDate.observe(viewLifecycleOwner, observeSelectedLocalDate(adapter))
         mViewModel.currentTypeView.observe(viewLifecycleOwner, observeCurrentTypeView())
-        mViewModel.mealWithDishes.observe(viewLifecycleOwner, observeMealWithDishesResult())
+        mViewModel.fetchedData.observe(viewLifecycleOwner, observeMealWithDishesResult())
     }
 
     private fun observeSelectedLocalDate(adapter: WeekAdapter): Observer<LocalDate> {

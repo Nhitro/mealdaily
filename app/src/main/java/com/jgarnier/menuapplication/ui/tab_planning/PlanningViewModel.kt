@@ -13,7 +13,6 @@ import com.jgarnier.menuapplication.data.repository.MealRepository
 import com.jgarnier.menuapplication.ui.base.AbstractListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import java.time.LocalDate
 
 /**
@@ -40,8 +39,6 @@ class PlanningViewModel @ViewModelInject constructor(
     private val mCurrentTypeView: MutableLiveData<Int>
 
     private val mMealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>>
-
-    private val mFetchDateChannel = ConflatedBroadcastChannel<LocalDate>()
 
     val selectedLocalDate: LiveData<LocalDate>
         get() = mSelectedLocalDate
@@ -70,14 +67,14 @@ class PlanningViewModel @ViewModelInject constructor(
     }
 
     override fun onCleared() {
-        savedStateHandle.set(TYPE_OF_VIEW, mCurrentTypeView)
-        savedStateHandle.set(MEAL_AND_DISHES, mMealWithDishesList)
-        savedStateHandle.set(LAST_DATE, mSelectedLocalDate)
+        savedStateHandle.set(TYPE_OF_VIEW, mCurrentTypeView.value)
+        savedStateHandle.set(MEAL_AND_DISHES, mMealWithDishesList.value)
+        savedStateHandle.set(LAST_DATE, mSelectedLocalDate.value)
     }
 
     fun userSelectedDate(localDate: LocalDate) {
         mSelectedLocalDate.postValue(localDate)
-        mFetchDateChannel.offer(localDate)
+        mFilterObjectChannel.offer(localDate)
     }
 
     fun selectWeekView() = postTypeViewIfDifferent(WEEK_DAY_VIEW)

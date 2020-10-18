@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.*
 abstract class AbstractListViewModel<T, U>(application: Application) :
     AndroidViewModel(application) {
 
-    private val mFetchDateChannel = ConflatedBroadcastChannel<T>()
+    protected val mFilterObjectChannel = ConflatedBroadcastChannel<T>()
 
     private val mFetchedDataAfterFiltered =
-        mFetchDateChannel
+        mFilterObjectChannel
             .asFlow()
             .flatMapLatest { filterObject -> fetchData(filterObject) }
             .map { value -> Result.Success(value) as Result<List<U>> }

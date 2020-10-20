@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.transition.TransitionManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -84,7 +83,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
             val action = PlanningFragmentDirections.actionPlanningFragmentToMealDialogFragment(
                 mSelectedDate ?: LocalDate.now()
             )
-            findNavController().navigate(action)
+            navigate(action)
         }
 
         // View Model observation
@@ -155,11 +154,10 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
     private fun userClickedOnMeal(): Consumer<MealWithDishes> {
         return Consumer {
             it.meal.apply {
-                val action = PlanningFragmentDirections.actionPlanningFragmentToMenuDetailFragment(
-                    mealDay, mealMonth, mealYear, mealSort.name
+                val action = PlanningFragmentDirections.actionPlanningFragmentToMealDetailFragment(
+                        mealDay, mealMonth, mealYear, mealSort.name
                 )
-
-                findNavController().navigate(action)
+                navigate(action)
             }
         }
     }

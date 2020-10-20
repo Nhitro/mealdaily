@@ -11,32 +11,36 @@ class MealRepository(private val mealDao: MealDao) {
 
 
     suspend fun insert(localDate: LocalDate, order: Int, mealSort: MealSort) =
-        withContext(Dispatchers.IO) {
-            mealDao.insert(
-                Meal(
-                    0,
-                    localDate.year,
-                    localDate.monthValue,
-                    localDate.dayOfMonth,
-                    order,
-                    mealSort
+            withContext(Dispatchers.IO) {
+                mealDao.insert(
+                        Meal(
+                                0,
+                                localDate.year,
+                                localDate.monthValue,
+                                localDate.dayOfMonth,
+                                order,
+                                mealSort
+                        )
                 )
-            )
-        }
+            }
 
     suspend fun getDailyMealAccording(localDate: LocalDate) = withContext(Dispatchers.IO) {
         mealDao.getMealWithDishesListAccordingDate(
-            localDate.dayOfMonth,
-            localDate.monthValue,
-            localDate.year
+                localDate.dayOfMonth,
+                localDate.monthValue,
+                localDate.year
         )
+    }
+
+    suspend fun findMealWithDishes(dayOfMonth: Int, month: Int, year: Int, mealSort: MealSort) = withContext(Dispatchers.IO) {
+        mealDao.getMealWithDishesAccordingDate(dayOfMonth, month, year, mealSort)
     }
 
     suspend fun getLastMealOrderOf(localDate: LocalDate) = withContext(Dispatchers.IO) {
         mealDao.getLastMealOrderOf(
-            localDate.dayOfMonth,
-            localDate.monthValue,
-            localDate.year
+                localDate.dayOfMonth,
+                localDate.monthValue,
+                localDate.year
         )
     }
 

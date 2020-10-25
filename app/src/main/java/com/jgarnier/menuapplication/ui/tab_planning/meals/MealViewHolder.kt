@@ -2,6 +2,7 @@ package com.jgarnier.menuapplication.ui.tab_planning.meals
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.raw.MealSort
@@ -20,13 +21,11 @@ class MealViewHolder(
         val dishes = mealWithDishes.dishes
         val mealSort = mealWithDishes.meal.mealSort
 
-        mBinding.dayMealName.setBackgroundColor(
-            context.getColor(
-                backgroundColorAccordingMealSort(mealSort)
-            )
-        )
+        Glide.with(mBinding.root)
+                .load(iconAccordingMealSort(mealSort))
+                .into(mBinding.dayMealIcon)
 
-        mBinding.dayMealCard.setOnClickListener { mUserClickedOnMeal.accept(mealWithDishes) }
+        mBinding.dayMealContainer.setOnClickListener { mUserClickedOnMeal.accept(mealWithDishes) }
         mBinding.dayMealName.text = context.getText(textAccordingMealSort(mealSort))
 
         if (dishes.isNotEmpty()) {
@@ -50,6 +49,16 @@ class MealViewHolder(
             MealSort.SNACK -> R.string.meal_snack
         }
     }
+
+    private fun iconAccordingMealSort(mealSort: MealSort): Int {
+        return when (mealSort) {
+            MealSort.BREAK_FAST -> R.drawable.ic_meal_breakfast
+            MealSort.LUNCH -> R.drawable.ic_meal_lunch
+            MealSort.DINNER -> R.drawable.ic_meal_dinner
+            MealSort.SNACK -> R.drawable.ic_meal_snackbar
+        }
+    }
+
 
     private fun backgroundColorAccordingMealSort(mealSort: MealSort): Int {
         return when (mealSort) {

@@ -12,16 +12,21 @@
     <string name="tab_menus_title">Menus</string>
     <string name="tab_shopping_title">Course</string>
 
-    <string name="meal_break_fast">PETIT DEJ</string>
-    <string name="meal_lunch">DEJ</string>
-    <string name="meal_dinner">DINER</string>
-    <string name="meal_snack">ENCAS</string>
+    <string name="meal_break_fast">Petit déjeuner</string>
+    <string name="meal_lunch">Déjeuner</string>
+    <string name="meal_dinner">Diner</string>
+    <string name="meal_snack">Encas</string>
+
     <string name="day_no_meals_label">Aucun repas n\'a été trouvé</string>
 
     <string name="meal_dialog_title">Ajout d\'un repas</string>
 
+    <string name="detail_meal_title">%1$s du %2$s</string>
+
     <string name="dialog_validate_label">valider</string>
     <string name="dialog_cancel_label">annuler</string>
+    <string name="no_dish_found">Aucun plat n\'a été trouvé</string>
+    <string name="meal_detail_fab_content_description">Ajout d\'un menu à la liste</string>
 
     <string-array name="meals_array">
         <item>Petit déjeuner</item>

@@ -110,11 +110,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper"
+            app:layout_constraintTop_toBottomOf="@id/days_line"
             tools:itemCount="1"
             tools:listitem="@layout/holder_day_meal" />
 
@@ -127,7 +128,6 @@
             app:layout_constraintEnd_toEndOf="@id/day_meals"
             app:layout_constraintStart_toStartOf="@id/day_meals"
             app:layout_constraintTop_toTopOf="@id/day_meals" />
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/planning_fab"

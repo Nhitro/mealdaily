@@ -13,8 +13,8 @@
         tools:layout="@layout/fragment_planning">
 
         <action
-            android:id="@+id/action_planningFragment_to_menuDetailFragment"
-            app:destination="@id/menuDetailFragment"
+            android:id="@+id/action_planningFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -31,9 +31,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/menuDetailFragment"
-        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MenuDetailFragment"
-        android:label="menu_detail_fragment"
+        android:id="@+id/mealDetailFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MealDetailFragment"
+        android:label="meal_detail_fragment"
         tools:layout="@layout/fragment_meal_detail">
         <argument
             android:name="day"

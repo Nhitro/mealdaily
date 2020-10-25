@@ -10,7 +10,7 @@ import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuDetailFragment : TransitionFragment(R.layout.fragment_detail_menu) {
+class MealDetailFragment : TransitionFragment(R.layout.fragment_meal_detail) {
 
     private val mViewModel: MealDetailViewModel by viewModels()
 

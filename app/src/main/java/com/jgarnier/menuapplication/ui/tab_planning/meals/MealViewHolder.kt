@@ -1,31 +1,31 @@
 package com.jgarnier.menuapplication.ui.tab_planning.meals
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.raw.MealSort
 import com.jgarnier.menuapplication.databinding.HolderDayMealBinding
+import com.jgarnier.menuapplication.ui.base.AbstractViewHolder
 import java.util.function.Consumer
 
 class MealViewHolder(
-    private val mUserClickedOnMeal: Consumer<MealWithDishes>,
-    itemView: View
-) : RecyclerView.ViewHolder(itemView) {
+        private val mUserClickedOnMeal: Consumer<MealWithDishes>,
+        itemView: View
+) : AbstractViewHolder<MealWithDishes>(itemView) {
 
     private val mBinding = HolderDayMealBinding.bind(itemView)
 
-    fun update(mealWithDishes: MealWithDishes) {
+    override fun update(data: MealWithDishes) {
         val context = mBinding.root.context
-        val dishes = mealWithDishes.dishes
-        val mealSort = mealWithDishes.meal.mealSort
+        val dishes = data.dishes
+        val mealSort = data.meal.mealSort
 
         Glide.with(mBinding.root)
                 .load(iconAccordingMealSort(mealSort))
                 .into(mBinding.dayMealIcon)
 
-        mBinding.dayMealContainer.setOnClickListener { mUserClickedOnMeal.accept(mealWithDishes) }
+        mBinding.dayMealContainer.setOnClickListener { mUserClickedOnMeal.accept(data) }
         mBinding.dayMealName.text = context.getText(textAccordingMealSort(mealSort))
 
         if (dishes.isNotEmpty()) {

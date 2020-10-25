@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/day_meal_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/day_meal_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,8 +30,9 @@
             android:textAllCaps="true"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@id/day_meal_icon"
-            app:layout_constraintTop_toTopOf="@id/day_meal_icon"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="matin" />
 
         <View
@@ -58,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/day_meal_first_menu_name"
             app:layout_constraintStart_toStartOf="@id/day_meal_first_menu_name"
@@ -66,15 +69,6 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Fondant au chocolat"
             tools:visibility="visible" />
-
-        <View
-            android:id="@+id/days_line"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@drawable/planning_gradient_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

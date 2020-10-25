@@ -3,7 +3,8 @@ package com.jgarnier.menuapplication.di
 import android.app.Application
 import androidx.room.Room
 import com.jgarnier.menuapplication.data.database.DailyMenuDatabase
-import com.jgarnier.menuapplication.data.repository.DailyMealRepository
+import com.jgarnier.menuapplication.data.repository.DishRepository
+import com.jgarnier.menuapplication.data.repository.MealRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,14 +19,20 @@ class DataModule {
     @Singleton
     fun provideDailyMenuDatabase(application: Application): DailyMenuDatabase {
         return Room
-            .databaseBuilder(application, DailyMenuDatabase::class.java, "menu_database.db")
-            .build()
+                .databaseBuilder(application, DailyMenuDatabase::class.java, "menu_database.db")
+                .build()
     }
 
     @Singleton
     @Provides
-    fun provideDailyMealRepository(dailyMenuDatabase: DailyMenuDatabase): DailyMealRepository {
-        return DailyMealRepository(dailyMenuDatabase.dailyMealsDao())
+    fun provideMealRepository(dailyMenuDatabase: DailyMenuDatabase): MealRepository {
+        return MealRepository(dailyMenuDatabase.mealDao())
+    }
+
+    @Singleton
+    @Provides
+    fun provideDishRepository(dailyMenuDatabase: DailyMenuDatabase): DishRepository {
+        return DishRepository(dailyMenuDatabase.dishDao())
     }
 
 }

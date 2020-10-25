@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_planning"
+    app:startDestination="@id/planningFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/planningFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.PlanningFragment"
+        android:label="planning_fragment"
+        tools:layout="@layout/fragment_planning">
+
+        <action
+            android:id="@+id/action_planningFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/action_planningFragment_to_searchMenuFragment"
+            app:destination="@id/searchMenuFragment" />
+
+        <action
+            android:id="@+id/action_planningFragment_to_mealDialogFragment"
+            app:destination="@id/mealDialogFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MealDetailFragment"
+        android:label="meal_detail_fragment"
+        tools:layout="@layout/fragment_meal_detail">
+        <argument
+            android:name="day"
+            app:argType="integer" />
+        <argument
+            android:name="month"
+            app:argType="integer" />
+        <argument
+            android:name="year"
+            app:argType="integer" />
+        <argument
+            android:name="mealSort"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchMenuFragment"
+        android:name="com.jgarnier.menuapplication.ui.menu_search.SearchMenuFragment"
+        android:label="search_menu_fragment"
+        tools:layout="@layout/search_menu_fragment">
+
+        <action
+            android:id="@+id/action_searchMenuFragment_to_menuFormFragment"
+            app:destination="@id/menuFormFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFormFragment"
+        android:name="com.jgarnier.menuapplication.ui.menu_form.MenuFormFragment"
+        android:label="menu_form_fragment"
+        tools:layout="@layout/menu_form_fragment" />
+
+    <dialog
+        android:id="@+id/mealDialogFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdialog.MealDialogFragment"
+        android:label="MealDialogFragment">
+
+        <argument
+            android:name="selectedDate"
+            app:argType="java.time.LocalDate" />
+
+    </dialog>
+
+</navigation>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#ec407a</color>
-    <color name="primaryLightColor">#ff77a9</color>
-    <color name="primaryDarkColor">#b4004e</color>
+    <color name="primaryColor">#03A9F4</color>
+    <color name="primaryLightColor">#3CC2FF</color>
+    <color name="primaryDarkColor">#0471C8</color>
     <color name="secondaryColor">#cddc39</color>
     <color name="secondaryLightColor">#ffff6e</color>
     <color name="secondaryDarkColor">#99aa00</color>
@@ -10,10 +10,13 @@
     <color name="secondaryTextColor">#000000</color>
     <color name="lightGray">#e0e0e0</color>
 
-    <color name="sunrise_red">#FC7174</color>
-    <color name="sunrise_brown">#EB6859</color>
-    <color name="sunrise_orange">#FC8862</color>
-    <color name="sunrise_orange_light">#FDA26B</color>
-    <color name="sunrise_yellow">#FDBB63</color>
+    <color name="lightMealTitleColor">#4DFFFFFF</color>
+
+    <color name="bleu_marine">#1E486C</color>
+    <color name="vert_poireau">#26A250</color>
+    <color name="vert_pomme">#B2DB35</color>
+    <color name="jaune_citron">#E3CC00</color>
+    <color name="orange">#FE7634</color>
+    <color name="fraise">#CA4D98</color>
 
 </resources>

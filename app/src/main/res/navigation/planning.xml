@@ -49,24 +49,6 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/searchMenuFragment"
-        android:name="com.jgarnier.menuapplication.ui.menu_search.SearchMenuFragment"
-        android:label="search_menu_fragment"
-        tools:layout="@layout/search_menu_fragment">
-
-        <action
-            android:id="@+id/action_searchMenuFragment_to_menuFormFragment"
-            app:destination="@id/menuFormFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/menuFormFragment"
-        android:name="com.jgarnier.menuapplication.ui.menu_form.MenuFormFragment"
-        android:label="menu_form_fragment"
-        tools:layout="@layout/menu_form_fragment" />
-
     <dialog
         android:id="@+id/mealDialogFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdialog.MealDialogFragment"

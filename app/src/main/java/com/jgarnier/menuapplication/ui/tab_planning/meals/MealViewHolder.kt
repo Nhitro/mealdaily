@@ -59,14 +59,4 @@ class MealViewHolder(
         }
     }
 
-
-    private fun backgroundColorAccordingMealSort(mealSort: MealSort): Int {
-        return when (mealSort) {
-            MealSort.BREAK_FAST -> R.color.vert_poireau
-            MealSort.LUNCH -> R.color.vert_pomme
-            MealSort.SNACK -> R.color.jaune_citron
-            MealSort.DINNER -> R.color.orange
-        }
-    }
-
 }

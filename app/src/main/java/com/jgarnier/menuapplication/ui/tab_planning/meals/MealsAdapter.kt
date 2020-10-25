@@ -38,11 +38,18 @@ class MealsAdapter(private val mUserClickedOnMeal: Consumer<MealWithDishes>) :
             notifyDataSetChanged()
         } else {
             selectedDate?.apply {
+                var needToUpdate = false
+
+                if (newMealsWithDishes.size != mMealWithDishes.size) {
+                    needToUpdate = true
+                }
+
                 mMealWithDishes.clear()
                 mMealWithDishes.addAll(newMealsWithDishes)
+
                 if (this != mSelectedDate) {
                     notifyDataSetChanged()
-                } else {
+                } else if (needToUpdate) {
                     notifyItemInserted(mMealWithDishes.size - 1)
                 }
                 mSelectedDate = this

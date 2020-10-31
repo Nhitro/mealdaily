@@ -26,23 +26,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:textAllCaps="true"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/day_meal_first_menu_name"
             app:layout_constraintStart_toEndOf="@id/day_meal_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="matin" />
-
-        <View
-            android:id="@+id/day_meal_line"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/day_meal_name"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@android:color/white" />
 
         <TextView
             android:id="@+id/day_meal_first_menu_name"
@@ -69,6 +61,18 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Fondant au chocolat"
             tools:visibility="visible" />
+
+        <View
+            android:id="@+id/day_meal_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/planning_gradient_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/day_meal_second_menu_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

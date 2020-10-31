@@ -27,6 +27,9 @@
     <string name="dialog_cancel_label">annuler</string>
     <string name="no_dish_found">Aucun plat n\'a été trouvé</string>
     <string name="meal_detail_fab_content_description">Ajout d\'un menu à la liste</string>
+    <string name="dishes_search_default_text">Rechercher dans les menus</string>
+    <string name="dishes_search_fab_content_description">Ajout d\'un nouveau menu à la liste</string>
+    <string name="dishes_menu_search_title">Rechercher un repas</string>
 
     <string-array name="meals_array">
         <item>Petit déjeuner</item>

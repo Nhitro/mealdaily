@@ -2,13 +2,17 @@ package com.jgarnier.menuapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MenuActivity : AppCompatActivity() {
+
+    private var lastNavController: NavController? = null
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -37,11 +41,20 @@ class MenuActivity : AppCompatActivity() {
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_fragment,
-            intent = intent
+                navGraphIds = navGraphIds,
+                fragmentManager = supportFragmentManager,
+                containerId = R.id.nav_host_fragment,
+                intent = intent
         )
+
+        val listener = bottomNavigationAnimationOnDestinationChanged()
+        controller.observe(this, Observer {
+            it.addOnDestinationChangedListener(listener)
+            lastNavController?.apply {
+                removeOnDestinationChangedListener(listener)
+            }
+            lastNavController = it
+        })
 
         currentNavController = controller
     }
@@ -49,4 +62,15 @@ class MenuActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
     }
+
+    private fun bottomNavigationAnimationOnDestinationChanged() =
+            NavController.OnDestinationChangedListener { _, destination, _ ->
+                run {
+                    val motionLayout = findViewById<MotionLayout>(R.id.main_container)
+                    when (destination.id) {
+                        R.id.planningFragment, R.id.menuFragment, R.id.shoppingListFragment -> motionLayout.transitionToStart()
+                        else -> motionLayout.transitionToEnd()
+                    }
+                }
+            }
 }

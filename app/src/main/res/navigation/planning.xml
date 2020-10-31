@@ -21,10 +21,6 @@
             app:popExitAnim="@anim/fade_out" />
 
         <action
-            android:id="@+id/action_planningFragment_to_searchMenuFragment"
-            app:destination="@id/searchMenuFragment" />
-
-        <action
             android:id="@+id/action_planningFragment_to_mealDialogFragment"
             app:destination="@id/mealDialogFragment" />
 
@@ -47,6 +43,13 @@
         <argument
             android:name="mealSort"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mealDetailFragment_to_dishesSearchFragment"
+            app:destination="@id/dishesSearchFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <dialog
@@ -59,5 +62,10 @@
             app:argType="java.time.LocalDate" />
 
     </dialog>
+    <fragment
+        android:id="@+id/dishesSearchFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.dishessearch.DishesSearchFragment"
+        android:label="fragment_dishes_search"
+        tools:layout="@layout/fragment_dishes_search" />
 
 </navigation>

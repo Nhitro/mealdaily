@@ -35,6 +35,15 @@ class MealDetailFragment : TransitionFragment(R.layout.fragment_meal_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mBinding.mealDetailAddFab.setOnClickListener {
+            val action = MealDetailFragmentDirections.actionMealDetailFragmentToDishesSearchFragment()
+            findNavController().navigate(action)
+        }
+
+        mBinding.mealDetailToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val adapter = DishesAdapter()
         mBinding.mealDetailList.adapter = adapter
 

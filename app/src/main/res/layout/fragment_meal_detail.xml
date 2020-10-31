@@ -9,9 +9,10 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/menu_detail_title"
+            android:id="@+id/meal_detail_toolbar"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/vert_pomme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -19,16 +20,16 @@
             tools:title="Petit déjeuner du Dim. 25 Oct." />
 
         <View
-            android:id="@+id/menu_detail_line"
+            android:id="@+id/meal_detail_line"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@drawable/planning_gradient_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menu_detail_title" />
+            app:layout_constraintTop_toBottomOf="@id/meal_detail_toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/menu_detail_list"
+            android:id="@+id/meal_detail_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -37,10 +38,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menu_detail_line" />
+            app:layout_constraintTop_toBottomOf="@id/meal_detail_line" />
 
         <ProgressBar
-            android:id="@+id/menu_detail_loader"
+            android:id="@+id/meal_detail_loader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/menu_detail_empty"
+            android:id="@+id/meal_detail_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_dish_found"
@@ -61,7 +62,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/meal_add_fab"
+            android:id="@+id/meal_detail_add_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

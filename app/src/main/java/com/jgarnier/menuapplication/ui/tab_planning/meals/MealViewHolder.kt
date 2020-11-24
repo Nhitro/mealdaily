@@ -29,6 +29,7 @@ class MealViewHolder(
         mBinding.dayMealName.text = context.getText(textAccordingMealSort(mealSort))
 
         if (dishes.isNotEmpty()) {
+            mBinding.dayMealFirstMenuName.visibility = View.VISIBLE
             mBinding.dayMealFirstMenuName.text = dishes[0].dishName
 
             val secondMenuName = mBinding.dayMealSecondMenuName
@@ -38,6 +39,9 @@ class MealViewHolder(
             } else {
                 secondMenuName.visibility = View.GONE
             }
+        } else {
+            mBinding.dayMealFirstMenuName.visibility = View.GONE
+            mBinding.dayMealSecondMenuName.visibility = View.GONE
         }
     }
 

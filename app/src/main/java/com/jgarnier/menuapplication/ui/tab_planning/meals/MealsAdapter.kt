@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
+import com.jgarnier.menuapplication.ui.base.ItemTouchHelperContract
 import java.time.LocalDate
 import java.util.*
 import java.util.function.Consumer
@@ -12,8 +13,8 @@ import kotlin.collections.ArrayList
 
 
 class MealsAdapter(private val mUserClickedOnMeal: Consumer<MealWithDishes>) :
-    RecyclerView.Adapter<MealViewHolder>(),
-    MealsMoveCallback.ItemTouchHelperContract {
+        RecyclerView.Adapter<MealViewHolder>(),
+        ItemTouchHelperContract {
 
     private val mMealWithDishes = ArrayList<MealWithDishes>()
 
@@ -21,8 +22,8 @@ class MealsAdapter(private val mUserClickedOnMeal: Consumer<MealWithDishes>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(
-            mUserClickedOnMeal,
-            LayoutInflater.from(parent.context).inflate(R.layout.holder_day_meal, parent, false)
+                mUserClickedOnMeal,
+                LayoutInflater.from(parent.context).inflate(R.layout.holder_day_meal, parent, false)
         )
     }
 
@@ -68,14 +69,6 @@ class MealsAdapter(private val mUserClickedOnMeal: Consumer<MealWithDishes>) :
             }
         }
         notifyItemMoved(fromPosition, toPosition)
-    }
-
-    override fun onRowSelected(myViewHolder: MealViewHolder?) {
-        // TODO : emphasis the cell
-    }
-
-    override fun onRowClear(myViewHolder: MealViewHolder?) {
-        // TODO : de-emphasis the cell and update database
     }
 
 }

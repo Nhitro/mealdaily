@@ -129,17 +129,19 @@
             app:layout_constraintStart_toStartOf="@id/day_meals"
             app:layout_constraintTop_toTopOf="@id/day_meals" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/planning_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_round_add_24"
-            app:backgroundTint="@color/fraise"
+            android:text="@string/planning_add_meal_title"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/orange"
+            app:icon="@drawable/ic_round_add_24"
+            app:iconTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@android:color/white" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,18 +31,23 @@
         android:name="com.jgarnier.menuapplication.ui.tab_planning.mealdetail.MealDetailFragment"
         android:label="meal_detail_fragment"
         tools:layout="@layout/fragment_meal_detail">
+
         <argument
             android:name="day"
             app:argType="integer" />
+
         <argument
             android:name="month"
             app:argType="integer" />
+
         <argument
             android:name="year"
             app:argType="integer" />
+
         <argument
             android:name="mealSort"
             app:argType="string" />
+
         <action
             android:id="@+id/action_mealDetailFragment_to_dishesSearchFragment"
             app:destination="@id/dishesSearchFragment"
@@ -62,10 +67,42 @@
             app:argType="java.time.LocalDate" />
 
     </dialog>
+
     <fragment
         android:id="@+id/dishesSearchFragment"
         android:name="com.jgarnier.menuapplication.ui.tab_planning.dishessearch.DishesSearchFragment"
         android:label="fragment_dishes_search"
-        tools:layout="@layout/fragment_dishes_search" />
+        tools:layout="@layout/fragment_dishes_search">
+
+        <action
+            android:id="@+id/action_dishesSearchFragment_to_dishCreationFragment"
+            app:destination="@id/dishCreationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dishCreationFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.dishcreation.DishCreationFragment"
+        android:label="fragment_dish_creation"
+        tools:layout="@layout/fragment_dish_creation">
+
+        <action
+            android:id="@+id/action_dishCreationFragment_to_foodCreationFragment"
+            app:destination="@id/foodCreationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodCreationFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.dishlinecreation.DishLineCreationFragment"
+        android:label="FoodCreationFragment" />
 
 </navigation>

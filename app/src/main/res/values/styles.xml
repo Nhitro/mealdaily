@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/vert_pomme</item>
         <item name="colorPrimaryDark">@color/vert_poireau</item>
         <item name="colorAccent">@color/orange</item>
-        <item name="android:statusBarColor">@color/vert_pomme</item>
+        <item name="android:statusBarColor">#A53508</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>

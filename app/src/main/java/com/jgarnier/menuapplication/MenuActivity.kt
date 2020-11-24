@@ -68,7 +68,10 @@ class MenuActivity : AppCompatActivity() {
                 run {
                     val motionLayout = findViewById<MotionLayout>(R.id.main_container)
                     when (destination.id) {
-                        R.id.planningFragment, R.id.menuFragment, R.id.shoppingListFragment -> motionLayout.transitionToStart()
+                        R.id.planningFragment,
+                        R.id.mealDialogFragment,
+                        R.id.menuFragment,
+                        R.id.shoppingListFragment -> motionLayout.transitionToStart()
                         else -> motionLayout.transitionToEnd()
                     }
                 }

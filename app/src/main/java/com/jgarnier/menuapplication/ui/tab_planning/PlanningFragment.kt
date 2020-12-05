@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.transition.TransitionManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.Result
@@ -40,6 +39,8 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
 
     private var mSelectedDate: LocalDate? = null
 
+    private var mViewCreation = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +52,8 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mViewCreation = true
 
         val adapter =
             WeekAdapter(LocalDate.now(), Consumer { mViewModel.userSelectedDate(it.localDate) })
@@ -108,15 +111,23 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
 
     private fun observeCurrentTypeView(): Observer<Int> {
         return Observer {
-            with(mBinding.planningCalendarFlipper, {
-                TransitionManager.beginDelayedTransition(mBinding.planningLayout)
-                // Managing transition calendar <- week days list
-                if (it == CALENDAR_VIEW && displayedChild != 1) {
-                    showNext()
-                } else if (it == PlanningViewModel.WEEK_DAY_VIEW && displayedChild != 0) {
-                    showPrevious()
+            // Managing transition calendar <- week days list
+            with(mBinding.planningLayout) {
+                if (it == CALENDAR_VIEW) {
+                    if (mViewCreation) {
+                        progress = 1.0f
+                    } else {
+                        transitionToEnd()
+                    }
+                } else if (it == PlanningViewModel.WEEK_DAY_VIEW) {
+                    if (mViewCreation) {
+                        progress = 0.0f
+                    } else {
+                        transitionToStart()
+                    }
                 }
-            })
+            }
+            mViewCreation = false
         }
     }
 
@@ -155,7 +166,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         return Consumer {
             it.meal.apply {
                 val action = PlanningFragmentDirections.actionPlanningFragmentToMealDetailFragment(
-                        mealDay, mealMonth, mealYear, mealSort.name
+                    mealDay, mealMonth, mealYear, mealSort.name
                 )
                 navigate(action)
             }

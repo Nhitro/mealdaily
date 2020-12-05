@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.tab_planning.PlanningFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/planning_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_planning_scene">
 
         <TextView
             android:id="@+id/planning_current_day_label"
@@ -20,10 +21,10 @@
             android:textAlignment="center"
             android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/planning_calendar_flipper"
+            app:layout_constraintBottom_toBottomOf="@id/planning_calendar_button_group"
             app:layout_constraintEnd_toStartOf="@id/planning_calendar_button_group"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/planning_calendar_button_group"
             tools:text="Mardi 23 Mai" />
 
         <com.google.android.material.button.MaterialButtonToggleGroup
@@ -54,41 +55,39 @@
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <ViewFlipper
-            android:id="@+id/planning_calendar_flipper"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/planning_days_dates"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:measureAllChildren="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="16"
+            tools:listitem="@layout/holder_week_date" />
+
+        <CalendarView
+            android:id="@+id/planning_days_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/planning_calendar_button_group">
+            app:layout_constraintTop_toBottomOf="@id/planning_calendar_button_group" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/planning_days_dates"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="16"
-                tools:listitem="@layout/holder_week_date" />
-
-            <CalendarView
-                android:id="@+id/planning_days_calendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </ViewFlipper>
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/planning_calendar_flipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="planning_days_dates,planning_days_calendar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/days_line"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@drawable/planning_gradient_background"
-            app:layout_constraintEnd_toEndOf="@id/planning_calendar_flipper"
-            app:layout_constraintStart_toStartOf="@id/planning_calendar_flipper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper" />
 
         <TextView
@@ -133,7 +132,6 @@
             android:id="@+id/planning_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:text="@string/planning_add_meal_title"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/orange"
@@ -143,6 +141,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>

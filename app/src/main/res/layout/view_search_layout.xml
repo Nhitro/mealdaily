@@ -5,15 +5,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/vert_pomme">
+        android:layout_height="?actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_closed_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/vert_pomme">
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/search_view_title"
@@ -22,6 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:textColor="@color/lightMealTitleColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/search_view_open_search"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +36,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/planning_gradient_background"
+                app:layout_constraintBottom_toBottomOf="@id/search_closed_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,6 +87,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/planning_gradient_background"
+                app:layout_constraintBottom_toBottomOf="@id/search_open_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

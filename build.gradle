@@ -1,26 +1,54 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext {
-        kotlin_version = "1.3.72"
-        nav_version = "2.3.0"
-        hilt_version = "2.28-alpha"
-        hilt_lifecycle_vm_version = "1.0.0-alpha02"
-        room_version = "2.2.5"
-        materialVersion = '1.2.1'
-        coroutines = '1.3.8'
-        paging_version = "3.0.0-alpha06"
-        nav_version = "2.3.0"
-        view_binding_property_delegate_version = "1.2.1"
-        glide_version = "4.11.0"
-    }
 
+    ext {
+        appcompat_version = "1.3.0-alpha02"
+
+        constraint_version = "2.1.0-alpha1"
+        core_ktx_version = "1.5.0-alpha05"
+        coroutines_version = "1.4.2"
+
+        databinding_version = "4.2.0-alpha16"
+
+        glide_version = "4.11.0"
+
+        hilt_version = "2.30.1-alpha"
+        hilt_lifecycle_vm_version = "1.0.0-alpha02"
+
+        junit_version = "4.13.1"
+
+        kotlin_version = "1.3.72"
+
+        lifecycle_version = "2.2.0"
+
+        material_version = '1.3.0-alpha04'
+
+        nav_version = "2.3.2"
+
+        paging_version = "3.0.0-alpha09"
+
+        room_version = "2.3.0-alpha03"
+
+        view_binding_property_delegate_version = "1.3.1"
+
+        // TEST
+        test_espresso_core_version = "3.4.0-alpha02"
+        test_junit_version = "1.1.3-alpha02"
+
+        // PLUGINS
+        gradle_plugin_version = "0.36.0"
+
+        // TOOLS
+        tools_build_gradle_version = "4.1.0"
+    }
 
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:$tools_build_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
@@ -28,6 +56,10 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id "com.github.ben-manes.versions" version "$gradle_plugin_version"
 }
 
 allprojects {

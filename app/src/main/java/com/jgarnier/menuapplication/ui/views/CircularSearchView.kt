@@ -21,19 +21,20 @@ import com.jgarnier.menuapplication.ui.base.ExtendedAnimatorListener
  */
 class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
+    val mBinding: ViewSearchLayoutBinding
+
     var isSearchOpen = false
 
     init {
-        val view = LayoutInflater.from(context).inflate(R.layout.view_search_layout, this, true)
-        val binding = ViewSearchLayoutBinding.bind(view)
-        binding.searchViewOpenSearch.setOnClickListener { openSearch() }
-        binding.searchViewCloseSearch.setOnClickListener { closeSearch() }
-        binding.searchViewInputText.addTextChangedListener { text ->
-            binding.searchViewClearSearch.visibility =
+        mBinding = ViewSearchLayoutBinding.inflate(LayoutInflater.from(context), this, true)
+        mBinding.searchViewOpenSearch.setOnClickListener { openSearch() }
+        mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
+        mBinding.searchViewInputText.addTextChangedListener { text ->
+            mBinding.searchViewClearSearch.visibility =
                 if (text.isNullOrEmpty()) View.GONE
                 else View.VISIBLE
         }
-        binding.searchViewClearSearch.setOnClickListener { binding.searchViewInputText.text.clear() }
+        mBinding.searchViewClearSearch.setOnClickListener { mBinding.searchViewInputText.text.clear() }
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CircularSearchView)
 
@@ -41,9 +42,9 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
         val title = attributes.getString(R.styleable.CircularSearchView_toolbarTitle)
 
         if (id != -1) {
-            binding.searchViewTitle.setText(id)
+            mBinding.searchViewTitle.setText(id)
         } else if (title != null) {
-            binding.searchViewTitle.text = title
+            mBinding.searchViewTitle.text = title
         }
 
         attributes.recycle()
@@ -60,38 +61,35 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
     }
 
     fun closeSearch() {
-        val binding = ViewSearchLayoutBinding.bind(rootView)
-        binding.searchViewCloseSearch.setOnClickListener(null)
+        mBinding.searchViewCloseSearch.setOnClickListener(null)
 
         val circularConceal = ViewAnimationUtils.createCircularReveal(
-            binding.searchOpenView,
-            (binding.searchViewOpenSearch.right + binding.searchViewOpenSearch.left) / 2,
-            (binding.searchViewOpenSearch.top + binding.searchViewOpenSearch.bottom) / 2,
+            mBinding.searchOpenView,
+            (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
+            (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
             width.toFloat(), 0f
         )
 
         circularConceal.duration = 300
         circularConceal.addListener(
-                ExtendedAnimatorListener(
-                        null,
-                        onCircularEndRunnable(circularConceal)
-                )
+            ExtendedAnimatorListener(
+                null,
+                onCircularEndRunnable(circularConceal)
+            )
         )
 
         circularConceal.start()
     }
 
     private fun openSearch() {
-        val binding = ViewSearchLayoutBinding.bind(rootView)
-
-        binding.searchViewOpenSearch.setOnClickListener(null)
-        binding.searchViewInputText.setText("")
-        binding.searchOpenView.visibility = View.VISIBLE
+        mBinding.searchViewOpenSearch.setOnClickListener(null)
+        mBinding.searchViewInputText.setText("")
+        mBinding.searchOpenView.visibility = View.VISIBLE
 
         val circularReveal = ViewAnimationUtils.createCircularReveal(
-            binding.searchOpenView,
-            (binding.searchViewOpenSearch.right + binding.searchViewOpenSearch.left) / 2,
-            (binding.searchViewOpenSearch.top + binding.searchViewOpenSearch.bottom) / 2,
+            mBinding.searchOpenView,
+            (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
+            (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
             0f, width.toFloat()
         )
 
@@ -101,30 +99,28 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
                 Runnable {
                     isSearchOpen = true
 
-                    binding.searchViewCloseSearch.setOnClickListener { closeSearch() }
-                    binding.searchViewInputText.requestFocus()
+                    mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
+                    mBinding.searchViewInputText.requestFocus()
 
                     val keyboard: InputMethodManager? =
                         getSystemService(context, InputMethodManager::class.java)
-                    keyboard?.showSoftInput(binding.searchViewInputText, 0)
-                        }
-                )
+                    keyboard?.showSoftInput(mBinding.searchViewInputText, 0)
+                }
+            )
         )
         circularReveal.duration = 300
         circularReveal.start()
     }
 
     private fun onCircularEndRunnable(circularConceal: Animator) = Runnable {
-        val binding = ViewSearchLayoutBinding.bind(rootView)
-
         isSearchOpen = false
-        binding.searchOpenView.visibility = View.GONE
-        binding.searchViewInputText.setText("")
-        binding.searchViewOpenSearch.setOnClickListener { openSearch() }
+        mBinding.searchOpenView.visibility = View.GONE
+        mBinding.searchViewInputText.setText("")
+        mBinding.searchViewOpenSearch.setOnClickListener { openSearch() }
         circularConceal.removeAllListeners()
 
         val keyboard: InputMethodManager? =
             getSystemService(context, InputMethodManager::class.java)
-        keyboard?.hideSoftInputFromWindow(binding.searchViewInputText.windowToken, 0)
+        keyboard?.hideSoftInputFromWindow(mBinding.searchViewInputText.windowToken, 0)
     }
 }

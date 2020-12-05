@@ -14,7 +14,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/planning_days_dates"
+            android:id="@id/planning_days_dates"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
@@ -23,13 +23,19 @@
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_button_group" />
 
         <Constraint
-            android:id="@+id/planning_days_calendar"
+            android:id="@id/planning_days_calendar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_button_group" />
+
+        <Constraint android:id="@id/day_meals_information">
+            <PropertySet
+                app:applyMotionScene="false"
+                app:visibilityMode="ignore" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -43,7 +49,6 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
 
         <Constraint
             android:id="@+id/planning_days_dates"
@@ -62,6 +67,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_button_group" />
+
+        <Constraint android:id="@id/day_meals_information">
+            <PropertySet
+                app:applyMotionScene="false"
+                app:visibilityMode="ignore" />
+        </Constraint>
 
     </ConstraintSet>
 

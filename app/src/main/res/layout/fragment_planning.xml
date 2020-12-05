@@ -90,20 +90,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planning_calendar_flipper" />
 
-        <TextView
-            android:id="@+id/day_meals_information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/day_no_meals_label"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/day_meals"
-            app:layout_constraintEnd_toEndOf="@id/day_meals"
-            app:layout_constraintStart_toStartOf="@id/day_meals"
-            app:layout_constraintTop_toTopOf="@id/day_meals"
-            tools:visibility="visible" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/day_meals"
             android:layout_width="0dp"
@@ -117,6 +103,18 @@
             app:layout_constraintTop_toBottomOf="@id/days_line"
             tools:itemCount="1"
             tools:listitem="@layout/holder_day_meal" />
+
+        <TextView
+            android:id="@+id/day_meals_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_no_meals_label"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/days_line" />
 
         <ProgressBar
             android:id="@+id/day_meals_loader"

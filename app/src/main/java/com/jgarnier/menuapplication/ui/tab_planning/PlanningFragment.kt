@@ -146,12 +146,12 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
                     mBinding.dayMealsLoader.visibility = View.GONE
 
                     if (it.data != null && it.data.isNotEmpty()) {
-                        adapter.submitList(it.data)
                         mBinding.dayMealsInformation.visibility = View.GONE
                         mBinding.dayMeals.visibility = View.VISIBLE
+                        adapter.submitList(it.data)
                     } else {
-                        mBinding.dayMeals.visibility = View.INVISIBLE
                         mBinding.dayMealsInformation.visibility = View.VISIBLE
+                        mBinding.dayMeals.visibility = View.INVISIBLE
                         adapter.submitList(null)
                     }
                 }

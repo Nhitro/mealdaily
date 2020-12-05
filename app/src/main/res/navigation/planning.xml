@@ -74,6 +74,10 @@
         android:label="fragment_dishes_search"
         tools:layout="@layout/fragment_dishes_search">
 
+        <argument
+            android:name="mealId"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_dishesSearchFragment_to_dishCreationFragment"
             app:destination="@id/dishCreationFragment"

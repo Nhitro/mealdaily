@@ -8,8 +8,8 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.jgarnier.menuapplication.ui.tab_menu.MenuFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_dish.DishFragment"
         android:label="menu_fragment"
-        tools:layout="@layout/fragment_menus" />
+        tools:layout="@layout/fragment_dishes" />
 
 </navigation>

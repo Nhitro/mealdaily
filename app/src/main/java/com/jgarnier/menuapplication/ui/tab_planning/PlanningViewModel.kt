@@ -1,11 +1,9 @@
 package com.jgarnier.menuapplication.ui.tab_planning
 
 import android.app.Application
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.data.Result.Loading
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
@@ -22,7 +20,6 @@ import java.time.LocalDate
 @ExperimentalCoroutinesApi
 class PlanningViewModel @ViewModelInject constructor(
     application: Application,
-    @Assisted private val savedStateHandle: SavedStateHandle,
     private val mMealRepository: MealRepository
 ) : AbstractListViewModel<LocalDate, MealWithDishes>(application) {
 
@@ -34,11 +31,12 @@ class PlanningViewModel @ViewModelInject constructor(
         const val WEEK_DAY_VIEW = 2
     }
 
-    private val mSelectedLocalDate: MutableLiveData<LocalDate>
+    private val mSelectedLocalDate = MutableLiveData(LocalDate.now())
 
-    private val mCurrentTypeView: MutableLiveData<Int>
+    private val mCurrentTypeView = MutableLiveData(WEEK_DAY_VIEW)
 
-    private val mMealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>>
+    private val mMealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>> =
+        MutableLiveData(Loading())
 
     val selectedLocalDate: LiveData<LocalDate>
         get() = mSelectedLocalDate
@@ -47,29 +45,7 @@ class PlanningViewModel @ViewModelInject constructor(
         get() = mCurrentTypeView
 
     init {
-        mSelectedLocalDate = savedStateHandle.get<MutableLiveData<LocalDate>>(LAST_DATE)
-            ?: MutableLiveData(LocalDate.now())
-
-        mCurrentTypeView =
-            savedStateHandle.get<MutableLiveData<Int>>(TYPE_OF_VIEW) ?: MutableLiveData(
-                WEEK_DAY_VIEW
-            )
-
-        val savedMealWithDishes =
-            savedStateHandle.get<MutableLiveData<Result<List<MealWithDishes>>>>(MEAL_AND_DISHES)
-
-        if (savedMealWithDishes == null) {
-            mMealWithDishesList = MutableLiveData(Loading())
-            userSelectedDate(mSelectedLocalDate.value!!)
-        } else {
-            mMealWithDishesList = savedMealWithDishes
-        }
-    }
-
-    override fun onCleared() {
-        savedStateHandle.set(TYPE_OF_VIEW, mCurrentTypeView.value)
-        savedStateHandle.set(MEAL_AND_DISHES, mMealWithDishesList.value)
-        savedStateHandle.set(LAST_DATE, mSelectedLocalDate.value)
+        userSelectedDate(mSelectedLocalDate.value!!)
     }
 
     fun userSelectedDate(localDate: LocalDate) {

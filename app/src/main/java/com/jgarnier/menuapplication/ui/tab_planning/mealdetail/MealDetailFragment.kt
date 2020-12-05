@@ -36,8 +36,14 @@ class MealDetailFragment : TransitionFragment(R.layout.fragment_meal_detail) {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.mealDetailAddFab.setOnClickListener {
-            val action = MealDetailFragmentDirections.actionMealDetailFragmentToDishesSearchFragment()
-            findNavController().navigate(action)
+            val mealWithDishes = mViewModel.mealWithDishes
+            if (mealWithDishes != null) {
+                val action =
+                    MealDetailFragmentDirections.actionMealDetailFragmentToDishesSearchFragment(
+                        mealWithDishes.meal.idMeal
+                    )
+                findNavController().navigate(action)
+            }
         }
 
         mBinding.mealDetailToolbar.setNavigationOnClickListener {

@@ -21,12 +21,12 @@ import com.jgarnier.menuapplication.ui.base.ExtendedAnimatorListener
  */
 class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
-    val mBinding: ViewSearchLayoutBinding
+    val mBinding: ViewSearchLayoutBinding =
+        ViewSearchLayoutBinding.inflate(LayoutInflater.from(context), this, true)
 
     var isSearchOpen = false
 
     init {
-        mBinding = ViewSearchLayoutBinding.inflate(LayoutInflater.from(context), this, true)
         mBinding.searchViewOpenSearch.setOnClickListener { openSearch() }
         mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
         mBinding.searchViewInputText.addTextChangedListener { text ->

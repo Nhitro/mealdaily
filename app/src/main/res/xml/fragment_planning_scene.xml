@@ -77,7 +77,8 @@
     </ConstraintSet>
 
     <Transition
+        android:id="@+id/startToEnd"
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
+        app:constraintSetStart="@id/start" />
 
 </MotionScene>

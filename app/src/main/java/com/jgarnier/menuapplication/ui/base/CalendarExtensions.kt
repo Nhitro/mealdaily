@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication
+package com.jgarnier.menuapplication.ui.base
 
 import android.widget.CalendarView
 import java.time.LocalDate

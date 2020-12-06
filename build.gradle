@@ -10,6 +10,8 @@ buildscript {
 
         databinding_version = "4.2.0-alpha16"
 
+        flip_view_version = "1.2.0"
+
         glide_version = "4.11.0"
 
         hilt_version = "2.30.1-alpha"

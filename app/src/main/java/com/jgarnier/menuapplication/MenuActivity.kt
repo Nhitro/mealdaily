@@ -7,10 +7,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jgarnier.menuapplication.ui.base.BottomNavigationBarManager
+import com.jgarnier.menuapplication.ui.base.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuActivity : AppCompatActivity() {
+class MenuActivity : AppCompatActivity(),
+        BottomNavigationBarManager {
 
     private var lastNavController: NavController? = null
 
@@ -76,4 +79,18 @@ class MenuActivity : AppCompatActivity() {
                     }
                 }
             }
+
+    override fun changeBottomVisibility(isVisible: Boolean) {
+        val motionLayout = findViewById<MotionLayout>(R.id.main_container)
+
+        if (isVisible) {
+            motionLayout.transitionToStart()
+        } else {
+            motionLayout.transitionToEnd()
+        }
+    }
+
+    override fun isShown(): Boolean =
+            findViewById<MotionLayout>(R.id.main_container).currentState == R.id.bottom_visible_constraint
+
 }

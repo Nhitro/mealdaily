@@ -2,7 +2,7 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/bottom_visible_constraint">
 
         <Constraint
             android:id="@+id/nav_host_fragment"
@@ -23,7 +23,7 @@
 
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
+    <ConstraintSet android:id="@+id/bottom_hidden_constraint">
 
         <Constraint
             android:id="@+id/nav_host_fragment"
@@ -45,8 +45,9 @@
     </ConstraintSet>
 
     <Transition
-        app:constraintSetEnd="@+id/end"
-        app:constraintSetStart="@+id/start"
+        app:constraintSetEnd="@id/bottom_hidden_constraint"
+        app:constraintSetStart="@id/bottom_visible_constraint"
+        app:duration="@android:integer/config_shortAnimTime"
         app:motionInterpolator="easeInOut">
 
         <OnClick
@@ -55,6 +56,6 @@
 
     </Transition>
 
-    <StateSet app:defaultState="@id/start" />
+    <StateSet app:defaultState="@id/bottom_visible_constraint" />
 
 </MotionScene>

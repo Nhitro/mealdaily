@@ -4,13 +4,14 @@ import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jgarnier.menuapplication.data.Result
-import com.jgarnier.menuapplication.data.Result.Loading
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.repository.MealRepository
 import com.jgarnier.menuapplication.ui.base.AbstractListViewModel
+import com.jgarnier.menuapplication.ui.base.SingleLiveEvent
+import com.jgarnier.menuapplication.ui.tab_planning.meals.SelectableMealWithDishes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
 /**
@@ -19,30 +20,31 @@ import java.time.LocalDate
 @FlowPreview
 @ExperimentalCoroutinesApi
 class PlanningViewModel @ViewModelInject constructor(
-    application: Application,
-    private val mMealRepository: MealRepository
-) : AbstractListViewModel<LocalDate, MealWithDishes>(application) {
+        application: Application,
+        private val mMealRepository: MealRepository
+) : AbstractListViewModel<LocalDate, SelectableMealWithDishes>(application) {
 
     companion object {
-        private const val LAST_DATE = "last_date_key_bundle"
-        private const val TYPE_OF_VIEW = "last_type_of_view_key_bundle"
-        private const val MEAL_AND_DISHES = "last_meals_and_dishes_key_bundle"
         const val CALENDAR_VIEW = 1
         const val WEEK_DAY_VIEW = 2
     }
 
     private val mSelectedLocalDate = MutableLiveData(LocalDate.now())
 
-    private val mCurrentTypeView = MutableLiveData(WEEK_DAY_VIEW)
+    private val mCurrentTypeView = SingleLiveEvent<Int>()
 
-    private val mMealWithDishesList: MutableLiveData<Result<List<MealWithDishes>>> =
-        MutableLiveData(Loading())
+    private val mIsDeletingMode = SingleLiveEvent<Boolean>()
+
+    private val mMealsSelected = ArrayList<MealWithDishes>()
 
     val selectedLocalDate: LiveData<LocalDate>
         get() = mSelectedLocalDate
 
     val currentTypeView: LiveData<Int>
         get() = mCurrentTypeView
+
+    val isDeletingMode: LiveData<Boolean>
+        get() = mIsDeletingMode
 
     init {
         userSelectedDate(mSelectedLocalDate.value!!)
@@ -53,16 +55,35 @@ class PlanningViewModel @ViewModelInject constructor(
         mFilterObjectChannel.offer(localDate)
     }
 
+    fun userChangeStateOf(selectableMealWithDishes: SelectableMealWithDishes) {
+        if (selectableMealWithDishes.isSelected) {
+            if (mMealsSelected.isEmpty()) {
+                mIsDeletingMode.postValue(true)
+            }
+            mMealsSelected.add(selectableMealWithDishes.mealWithDishes)
+        } else {
+            mMealsSelected.remove(selectableMealWithDishes.mealWithDishes)
+            if (mMealsSelected.isEmpty()) {
+                mIsDeletingMode.postValue(false)
+            }
+        }
+    }
+
     fun selectWeekView() = postTypeViewIfDifferent(WEEK_DAY_VIEW)
     fun selectMonthView() = postTypeViewIfDifferent(CALENDAR_VIEW)
 
     private fun postTypeViewIfDifferent(typeView: Int) {
-        if (mCurrentTypeView.value != null && mCurrentTypeView.value != typeView) {
+        if (mCurrentTypeView.value == null || mCurrentTypeView.value != typeView) {
             mCurrentTypeView.postValue(typeView)
         }
     }
 
     override suspend fun fetchData(filterObject: LocalDate) =
-        mMealRepository.getDailyMealAccording(filterObject)
-
+            mMealRepository
+                    .getDailyMealAccording(filterObject)
+                    .map { list ->
+                        list.map { mealWithDishes ->
+                            SelectableMealWithDishes(mealWithDishes, mMealsSelected.contains(mealWithDishes), false)
+                        }
+                    }
 }

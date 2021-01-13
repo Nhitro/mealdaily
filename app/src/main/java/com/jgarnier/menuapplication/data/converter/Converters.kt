@@ -5,6 +5,9 @@ import com.jgarnier.menuapplication.data.raw.AmountSort
 import com.jgarnier.menuapplication.data.raw.MealSort
 import java.util.*
 
+/**
+ * Converts any type of value that does not exist in SQLite to a SQLite value type and vice versa
+ */
 class Converters {
 
     @TypeConverter

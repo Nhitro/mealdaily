@@ -4,10 +4,16 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- *
+ * Basic contract of a view holder within the application
  */
 abstract class AbstractViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    abstract fun update(data: T)
+    open fun update(data: T) {
+        // emtpy
+    }
+
+    open fun update(data: T, selectableManager: SelectableContract) {
+        // empty
+    }
 
 }

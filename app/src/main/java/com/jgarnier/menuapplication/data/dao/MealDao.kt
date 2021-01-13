@@ -5,15 +5,22 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import com.jgarnier.menuapplication.data.entity.Meal
+import com.jgarnier.menuapplication.data.entity.MealDishCrossRef
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.raw.MealSort
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Dao of [Meal]
+ */
 @Dao
 interface MealDao {
 
     @Insert
     fun insert(meal: Meal)
+
+    @Insert
+    fun insert(mealDishCrossRef: MealDishCrossRef)
 
     @Transaction
     @Query("SELECT * FROM Meal WHERE mealDay = :day AND mealMonth = :month AND mealYear = :year")

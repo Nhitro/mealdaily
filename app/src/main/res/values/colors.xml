@@ -10,11 +10,11 @@
     <color name="secondaryTextColor">#000000</color>
     <color name="lightGray">#e0e0e0</color>
 
-    <color name="lightMealTitleColor">#4DFFFFFF</color>
+    <color name="lightMealTitleColor">#646464</color>
 
     <color name="bleu_marine">#1E486C</color>
     <color name="vert_poireau">#26A250</color>
-    <color name="vert_pomme">#B2DB35</color>
+    <color name="vert_pomme">#E3490C</color>
     <color name="jaune_citron">#E3CC00</color>
     <color name="orange">#FE7634</color>
     <color name="fraise">#CA4D98</color>

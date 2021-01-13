@@ -22,11 +22,23 @@
     <string name="meal_dialog_title">Ajout d\'un repas</string>
 
     <string name="detail_meal_title">%1$s du %2$s</string>
+    <string name="selected_number_text">%1$d sélectionné(s)</string>
 
     <string name="dialog_validate_label">valider</string>
     <string name="dialog_cancel_label">annuler</string>
     <string name="no_dish_found">Aucun plat n\'a été trouvé</string>
     <string name="meal_detail_fab_content_description">Ajout d\'un menu à la liste</string>
+    <string name="dishes_search_default_text">Rechercher dans les menus</string>
+    <string name="dishes_search_fab_content_description">Ajout d\'un nouveau menu à la liste</string>
+    <string name="dishes_menu_search_title">Rechercher un repas</string>
+    <string name="dish_creation_name_title">Nom</string>
+    <string name="dish_creation_link_input_hint">Lien youtube / Livre recette…</string>
+    <string name="dish_creation_food_name_input_hint">Nom de l\'aliment</string>
+    <string name="dish_creation_food_quantity_input_hint">0,00</string>
+    <string name="dish_creation_menu_save_title">Sauvegarder</string>
+    <string name="dish_creation_menu_delete_title">Supprimer</string>
+
+    <string name="dish_cell_ingredient_label">Ingrédients : %1$s</string>
 
     <string-array name="meals_array">
         <item>Petit déjeuner</item>
@@ -34,5 +46,17 @@
         <item>Encas</item>
         <item>Dîner</item>
     </string-array>
+
+    <string name="amount_sort_litre_short">L</string>
+    <string name="amount_sort_centilitre_short">cL</string>
+    <string name="amount_sort_mililitre_short">mL</string>
+    <string name="amount_sort_gram_short">g</string>
+    <string name="amount_sort_kilogram_short">kg</string>
+    <string name="amount_sort_unit_short">unité</string>
+    <string name="dish_creation_toolbar_title">Nouveau plat</string>
+    <string name="dish_creation_add_button_text">ajouter l\'aliment</string>
+    <string name="dish_creation_fab_title">modifier aliments</string>
+    <string name="planning_add_meal_title">Ajout repas</string>
+    <string name="meal_detail_add_fab_title">Ajout plat</string>
 
 </resources>

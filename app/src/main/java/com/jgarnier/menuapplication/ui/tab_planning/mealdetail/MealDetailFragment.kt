@@ -35,31 +35,44 @@ class MealDetailFragment : TransitionFragment(R.layout.fragment_meal_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = DishesAdapter()
+        mBinding.mealDetailAddFab.setOnClickListener {
+            val mealWithDishes = mViewModel.mealWithDishes
+            if (mealWithDishes != null) {
+                val action =
+                    MealDetailFragmentDirections.actionMealDetailFragmentToDishesSearchFragment(
+                        mealWithDishes.meal.idMeal
+                    )
+                findNavController().navigate(action)
+            }
+        }
 
-        mBinding.menuDetailTitle.setNavigationOnClickListener { findNavController().popBackStack() }
-        mBinding.menuDetailList.adapter = adapter
+        mBinding.mealDetailToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        val adapter = DishesAdapter()
+        mBinding.mealDetailList.adapter = adapter
 
         mViewModel.fetchedData.observe(viewLifecycleOwner, Observer {
             if (it is Result.Loading) {
-                mBinding.menuDetailLoader.visibility = View.VISIBLE
-                mBinding.menuDetailList.visibility = View.INVISIBLE
-                mBinding.menuDetailEmpty.visibility = View.GONE
+                mBinding.mealDetailLoader.visibility = View.VISIBLE
+                mBinding.mealDetailList.visibility = View.INVISIBLE
+                mBinding.mealDetailEmpty.visibility = View.GONE
             } else {
                 val dishes = it.data ?: ArrayList()
-                mBinding.menuDetailLoader.visibility = View.GONE
-                mBinding.menuDetailList.visibility = View.VISIBLE
+                mBinding.mealDetailLoader.visibility = View.GONE
+                mBinding.mealDetailList.visibility = View.VISIBLE
 
                 if (dishes.isEmpty()) {
-                    mBinding.menuDetailEmpty.visibility = View.VISIBLE
+                    mBinding.mealDetailEmpty.visibility = View.VISIBLE
                 } else {
-                    mBinding.menuDetailEmpty.visibility = View.GONE
+                    mBinding.mealDetailEmpty.visibility = View.GONE
                 }
 
                 adapter.submitList(dishes)
             }
         })
 
-        mViewModel.mealTitle.observe(viewLifecycleOwner, Observer { mBinding.menuDetailTitle.title = it })
+        mViewModel.mealTitle.observe(viewLifecycleOwner, Observer { mBinding.mealDetailToolbar.title = it })
     }
 }

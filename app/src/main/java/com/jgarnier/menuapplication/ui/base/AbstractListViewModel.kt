@@ -10,20 +10,26 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 
+/**
+ * @param T is standing for object used in order to filter
+ * @param U is the filtered object list
+ */
 @FlowPreview
 @ExperimentalCoroutinesApi
 abstract class AbstractListViewModel<T, U>(application: Application) :
-    AndroidViewModel(application) {
+        AndroidViewModel(application) {
 
+    // FIXME : Must migrate to StateFlow
+    // See https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html
     protected val mFilterObjectChannel = ConflatedBroadcastChannel<T>()
 
     private val mFetchedDataAfterFiltered =
-        mFilterObjectChannel
-            .asFlow()
-            .flatMapLatest { filterObject -> fetchData(filterObject) }
-            .map { value -> Result.Success(value) as Result<List<U>> }
-            .catch { cause -> Result.Error<List<U>>(cause.message) }
-            .asLiveData()
+            mFilterObjectChannel
+                    .asFlow()
+                    .flatMapLatest { filterObject -> fetchData(filterObject) }
+                    .map { value -> Result.Success(value) as Result<List<U>> }
+                    .catch { cause -> Result.Error<List<U>>(cause.message) }
+                    .asLiveData()
 
     val fetchedData: LiveData<Result<List<U>>>
         get() = mFetchedDataAfterFiltered

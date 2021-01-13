@@ -1,11 +1,9 @@
 package com.jgarnier.menuapplication.ui.tab_planning.mealdetail
 
 import android.app.Application
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.entity.Dish
@@ -25,17 +23,16 @@ import java.time.format.DateTimeFormatter
 @FlowPreview
 class MealDetailViewModel @ViewModelInject constructor(
         application: Application,
-        @Assisted private val savedStateHandle: SavedStateHandle,
         private val mMealRepository: MealRepository,
         private val mDishRepository: DishRepository
 ) : AbstractListViewModel<Int, Dish>(application) {
 
     private val mealTitleLiveData: MutableLiveData<String> = MutableLiveData()
 
-    private var mealWithDishes: MealWithDishes? = null
-
     val mealTitle: LiveData<String>
         get() = mealTitleLiveData
+
+    var mealWithDishes: MealWithDishes? = null
 
     override suspend fun fetchData(filterObject: Int): Flow<List<Dish>> {
         return mDishRepository.getDishesAssociatedToMeal(filterObject)

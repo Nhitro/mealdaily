@@ -9,13 +9,25 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white">
 
-        <ImageView
+        <eu.davidea.flipview.FlipView
             android:id="@+id/day_meal_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:clipToPadding="false"
+            app:animateRearImage="true"
+            app:checked="false"
+            app:enableInitialAnimation="false"
+            app:frontBackgroundColor="#70FA8E09"
+            app:frontLayout="@layout/holder_day_meal_front"
+            app:rearBackgroundColor="@color/vert_pomme"
+            app:rearImageAnimation="@anim/scale_up"
+            app:rearImageAnimationDelay="0"
+            app:rearImageAnimationDuration="150"
+            app:rearLayout="@layout/holder_day_meal_rear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,50 +37,55 @@
             android:id="@+id/day_meal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:gravity="center"
             android:textAllCaps="true"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/day_meal_first_menu_name"
             app:layout_constraintStart_toEndOf="@id/day_meal_icon"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="matin" />
-
-        <View
-            android:id="@+id/day_meal_line"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/day_meal_name"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@android:color/white" />
 
         <TextView
             android:id="@+id/day_meal_first_menu_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/day_meal_second_menu_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/day_meal_name"
             app:layout_constraintTop_toBottomOf="@id/day_meal_name"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Enchillas au poulet" />
+            tools:text="Enchillas au poulet"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/day_meal_second_menu_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="12dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/day_meal_first_menu_name"
-            app:layout_constraintStart_toStartOf="@id/day_meal_first_menu_name"
+            app:layout_constraintStart_toStartOf="@id/day_meal_name"
             app:layout_constraintTop_toBottomOf="@id/day_meal_first_menu_name"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Fondant au chocolat"
             tools:visibility="visible" />
+
+        <View
+            android:id="@+id/day_meal_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/planning_gradient_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package com.jgarnier.menuapplication.di
 import android.app.Application
 import androidx.room.Room
 import com.jgarnier.menuapplication.data.database.DailyMenuDatabase
+import com.jgarnier.menuapplication.data.repository.DishLineRepository
 import com.jgarnier.menuapplication.data.repository.DishRepository
 import com.jgarnier.menuapplication.data.repository.MealRepository
 import dagger.Module
@@ -33,6 +34,12 @@ class DataModule {
     @Provides
     fun provideDishRepository(dailyMenuDatabase: DailyMenuDatabase): DishRepository {
         return DishRepository(dailyMenuDatabase.dishDao())
+    }
+
+    @Singleton
+    @Provides
+    fun provideDishLineRepository(dailyMenuDatabase: DailyMenuDatabase): DishLineRepository {
+        return DishLineRepository(dailyMenuDatabase.dishLineDao())
     }
 
 }

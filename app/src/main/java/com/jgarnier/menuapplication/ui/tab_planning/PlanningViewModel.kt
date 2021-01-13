@@ -37,6 +37,8 @@ class PlanningViewModel @ViewModelInject constructor(
 
     private val mMealsSelected = ArrayList<MealWithDishes>()
 
+    private val mMealsSelectedNumber = MutableLiveData(0)
+
     val selectedLocalDate: LiveData<LocalDate>
         get() = mSelectedLocalDate
 
@@ -45,6 +47,9 @@ class PlanningViewModel @ViewModelInject constructor(
 
     val isDeletingMode: LiveData<Boolean>
         get() = mIsDeletingMode
+
+    val mealSelectedNumber: LiveData<Int>
+        get() = mMealsSelectedNumber
 
     init {
         userSelectedDate(mSelectedLocalDate.value!!)

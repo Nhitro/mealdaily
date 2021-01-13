@@ -95,6 +95,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         mViewModel.currentTypeView.observe(viewLifecycleOwner, observeCurrentTypeView())
         mViewModel.fetchedData.observe(viewLifecycleOwner, observeMealWithDishesResult())
         mViewModel.isDeletingMode.observe(viewLifecycleOwner, observeIsDeletingMode())
+        mViewModel.mealSelectedNumber.observe(viewLifecycleOwner, observeSelectedNumber())
     }
 
     private fun createOnTransitionFabChange(): MotionLayout.TransitionListener {

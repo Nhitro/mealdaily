@@ -11,7 +11,7 @@ import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.data.Result
 import com.jgarnier.menuapplication.databinding.FragmentMealDetailBinding
 import com.jgarnier.menuapplication.ui.base.TransitionFragment
-import com.jgarnier.menuapplication.ui.tab_planning.dishes.DishesAdapter
+import com.jgarnier.menuapplication.ui.tab_planning.mealdetail.list.DishesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

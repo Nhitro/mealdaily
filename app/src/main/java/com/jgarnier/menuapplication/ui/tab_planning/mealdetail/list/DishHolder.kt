@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning.dishes
+package com.jgarnier.menuapplication.ui.tab_planning.mealdetail.list
 
 import android.view.View
 import com.jgarnier.menuapplication.data.entity.Dish

@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning
+package com.jgarnier.menuapplication.ui.tab_planning.planning
 
 import android.os.Bundle
 import android.view.View
@@ -14,11 +14,12 @@ import com.jgarnier.menuapplication.databinding.FragmentPlanningBinding
 import com.jgarnier.menuapplication.ui.base.BottomNavigationBarManager
 import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import com.jgarnier.menuapplication.ui.base.setLocalDate
-import com.jgarnier.menuapplication.ui.tab_planning.PlanningViewModel.Companion.CALENDAR_VIEW
-import com.jgarnier.menuapplication.ui.tab_planning.meals.MealsAdapter
-import com.jgarnier.menuapplication.ui.tab_planning.meals.MealsMoveCallback
-import com.jgarnier.menuapplication.ui.tab_planning.meals.SelectableMealWithDishes
-import com.jgarnier.menuapplication.ui.tab_planning.week.WeekAdapter
+import com.jgarnier.menuapplication.ui.tab_planning.PlanningFragmentDirections
+import com.jgarnier.menuapplication.ui.tab_planning.planning.PlanningViewModel.Companion.CALENDAR_VIEW
+import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.MealsAdapter
+import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.MealsMoveCallback
+import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.SelectableMealWithDishes
+import com.jgarnier.menuapplication.ui.tab_planning.planning.week.WeekAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

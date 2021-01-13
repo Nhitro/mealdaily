@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning.week
+package com.jgarnier.menuapplication.ui.tab_planning.planning.week
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

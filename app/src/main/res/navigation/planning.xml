@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/planningFragment"
-        android:name="com.jgarnier.menuapplication.ui.tab_planning.PlanningFragment"
+        android:name="com.jgarnier.menuapplication.ui.tab_planning.planning.PlanningFragment"
         android:label="planning_fragment"
         tools:layout="@layout/fragment_planning">
 

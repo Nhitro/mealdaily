@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning.meals
+package com.jgarnier.menuapplication.ui.tab_planning.planning.meals
 
 import com.jgarnier.menuapplication.data.entity.MealWithDishes
 

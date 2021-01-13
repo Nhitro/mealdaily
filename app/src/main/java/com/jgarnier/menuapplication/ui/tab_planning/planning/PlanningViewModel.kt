@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning
+package com.jgarnier.menuapplication.ui.tab_planning.planning
 
 import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
@@ -8,7 +8,7 @@ import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.repository.MealRepository
 import com.jgarnier.menuapplication.ui.base.AbstractListViewModel
 import com.jgarnier.menuapplication.ui.base.SingleLiveEvent
-import com.jgarnier.menuapplication.ui.tab_planning.meals.SelectableMealWithDishes
+import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.SelectableMealWithDishes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.map

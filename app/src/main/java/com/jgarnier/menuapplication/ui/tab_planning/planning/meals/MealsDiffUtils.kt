@@ -1,4 +1,4 @@
-package com.jgarnier.menuapplication.ui.tab_planning.meals
+package com.jgarnier.menuapplication.ui.tab_planning.planning.meals
 
 import androidx.recyclerview.widget.DiffUtil
 

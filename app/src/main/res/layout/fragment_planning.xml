@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.tab_planning.PlanningFragment">
+    tools:context=".ui.tab_planning.planning.PlanningFragment">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/planning_layout"

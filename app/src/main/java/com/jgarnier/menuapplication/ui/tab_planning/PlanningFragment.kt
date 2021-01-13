@@ -129,6 +129,12 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         }
     }
 
+    /**
+     * Updates the selected date text view
+     * Moreover, calendar widget and week list are noticed of the selected date
+     * Finally, it keeps the reference of the date in order to allow the user to go back to the
+     * selected date within the calendar or the week list when he clicks on the text view.
+     */
     private fun observeSelectedLocalDate(adapter: WeekAdapter): Observer<LocalDate> {
         return Observer {
             mSelectedDate = it
@@ -143,23 +149,34 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         }
     }
 
+    /**
+     * Updates the motion layout transition according to the selected mode by the user
+     */
     private fun observeCurrentTypeView(): Observer<Int> {
         return Observer {
             // Managing transition calendar <- week days list
             with(mBinding.planningLayout) {
+                // FIXME : Find a better way to reset the transition when we go back on the fragment
+                // Without this transition set, motion layout messes up and seems to keep the deleting
+                // transition as current transition despite the fact that [resetTransitionAfterBackToStart]
+                // calls setTransition(R.id.dayToMonth) once the last transition is done
+                setTransition(R.id.dayToMonth)
                 if (it == CALENDAR_VIEW) {
-                    setTransition(R.id.dayToMonth)
                     transitionToEnd()
                 } else {
-                    setTransition(R.id.dayToMonth)
                     transitionToStart()
                 }
             }
         }
     }
 
+    /**
+     * This method is in charge of creating adapter and its helper objects and also observing
+     * the filtered list in order to update the recycler view each time the user selects a new date
+     */
     private fun observeMealWithDishesResult(): Observer<Result<List<SelectableMealWithDishes>>> {
         val adapter = MealsAdapter(userClickedOnMeal())
+        // TODO : Is necessary to swap positions ? Is it helpful for the user ?
         val mealsMoveTouchHelper = ItemTouchHelper(MealsMoveCallback(adapter))
         mealsMoveTouchHelper.attachToRecyclerView(mBinding.dayMeals)
         mBinding.dayMeals.adapter = adapter
@@ -186,6 +203,25 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         }
     }
 
+    /**
+     * Updates the text view that is reminding the meals selected number
+     */
+    private fun observeSelectedNumber(): Observer<Int> {
+        return Observer {
+            mBinding.planningActionbarDelete.title =
+                    if (it == 0) {
+                        ""
+                    } else {
+                        context?.getString(R.string.selected_number_text, it)
+                    }
+        }
+    }
+
+    /**
+     * According to the selected mode, motion layout's transition changes
+     * This method is in charge of keeping up to date the transition and its progression according
+     * to the last selected mode
+     */
     private fun observeIsDeletingMode() = Observer<Boolean> {
         with(mBinding.planningLayout) {
             if (it) {
@@ -196,6 +232,10 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
                 }
                 transitionToEnd()
             } else {
+                // When we have to go back from the deleting mode to normal mode
+                // Firstly, we have to play the animation from end to start
+                // Secondly, we have to change the deleting transition (according to the view mode,
+                // calendar or week) for the normal one (transition week <--> calendar)
                 addTransitionListener(resetTransitionAfterBackToStart())
                 transitionToStart()
             }
@@ -206,6 +246,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
         }
     }
 
+    // TODO : Create a utility class as ExtendedTextWatcher
     private fun resetTransitionAfterBackToStart(): MotionLayout.TransitionListener {
         return object : MotionLayout.TransitionListener {
 
@@ -233,7 +274,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
     }
 
     /**
-     * Navigate to meal detail on user click
+     * Navigates to meal detail on user click
      */
     private fun userClickedOnMeal(): Consumer<SelectableMealWithDishes> {
         return Consumer {

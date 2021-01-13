@@ -22,6 +22,7 @@
     <string name="meal_dialog_title">Ajout d\'un repas</string>
 
     <string name="detail_meal_title">%1$s du %2$s</string>
+    <string name="selected_number_text">%1$d sélectionné(s)</string>
 
     <string name="dialog_validate_label">valider</string>
     <string name="dialog_cancel_label">annuler</string>
@@ -36,6 +37,8 @@
     <string name="dish_creation_food_quantity_input_hint">0,00</string>
     <string name="dish_creation_menu_save_title">Sauvegarder</string>
     <string name="dish_creation_menu_delete_title">Supprimer</string>
+
+    <string name="dish_cell_ingredient_label">Ingrédients : %1$s</string>
 
     <string-array name="meals_array">
         <item>Petit déjeuner</item>

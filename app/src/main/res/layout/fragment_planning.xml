@@ -59,7 +59,9 @@
             android:id="@+id/planning_actionbar_delete"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/orange"
+            android:background="@android:color/white"
+            app:menu="@menu/meals_toolbar_menu"
+            app:navigationIcon="?attr/homeAsUpIndicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

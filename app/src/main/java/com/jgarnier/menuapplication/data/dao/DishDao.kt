@@ -8,6 +8,9 @@ import com.jgarnier.menuapplication.data.entity.Dish
 import com.jgarnier.menuapplication.data.entity.DishWithLines
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Dao of [Dish]
+ */
 @Dao
 interface DishDao {
 

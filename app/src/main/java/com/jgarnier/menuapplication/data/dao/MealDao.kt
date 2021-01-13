@@ -10,6 +10,9 @@ import com.jgarnier.menuapplication.data.entity.MealWithDishes
 import com.jgarnier.menuapplication.data.raw.MealSort
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Dao of [Meal]
+ */
 @Dao
 interface MealDao {
 
@@ -22,9 +25,9 @@ interface MealDao {
     @Transaction
     @Query("SELECT * FROM Meal WHERE mealDay = :day AND mealMonth = :month AND mealYear = :year")
     fun getMealWithDishesListAccordingDate(
-        day: Int,
-        month: Int,
-        year: Int
+            day: Int,
+            month: Int,
+            year: Int
     ): Flow<List<MealWithDishes>>
 
     @Transaction

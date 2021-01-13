@@ -6,10 +6,10 @@ import java.time.ZoneOffset
 
 fun CalendarView.setLocalDate(localDate: LocalDate, animate: Boolean, center: Boolean) {
     this.setDate(
-        localDate.atStartOfDay()
-            .toInstant(ZoneOffset.UTC)
-            .toEpochMilli(),
-        animate,
-        center
+            localDate.atStartOfDay()
+                    .toInstant(ZoneOffset.UTC)
+                    .toEpochMilli(),
+            animate,
+            center
     )
 }

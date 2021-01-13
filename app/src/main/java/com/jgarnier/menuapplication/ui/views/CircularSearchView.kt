@@ -16,13 +16,10 @@ import com.jgarnier.menuapplication.R
 import com.jgarnier.menuapplication.databinding.ViewSearchLayoutBinding
 import com.jgarnier.menuapplication.ui.base.ExtendedAnimatorListener
 
-/**
- *
- */
 class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
     val mBinding: ViewSearchLayoutBinding =
-        ViewSearchLayoutBinding.inflate(LayoutInflater.from(context), this, true)
+            ViewSearchLayoutBinding.inflate(LayoutInflater.from(context), this, true)
 
     var isSearchOpen = false
 
@@ -31,8 +28,8 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
         mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
         mBinding.searchViewInputText.addTextChangedListener { text ->
             mBinding.searchViewClearSearch.visibility =
-                if (text.isNullOrEmpty()) View.GONE
-                else View.VISIBLE
+                    if (text.isNullOrEmpty()) View.GONE
+                    else View.VISIBLE
         }
         mBinding.searchViewClearSearch.setOnClickListener { mBinding.searchViewInputText.text.clear() }
 
@@ -64,18 +61,18 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
         mBinding.searchViewCloseSearch.setOnClickListener(null)
 
         val circularConceal = ViewAnimationUtils.createCircularReveal(
-            mBinding.searchOpenView,
-            (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
-            (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
-            width.toFloat(), 0f
+                mBinding.searchOpenView,
+                (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
+                (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
+                width.toFloat(), 0f
         )
 
         circularConceal.duration = 300
         circularConceal.addListener(
-            ExtendedAnimatorListener(
-                null,
-                onCircularEndRunnable(circularConceal)
-            )
+                ExtendedAnimatorListener(
+                        null,
+                        onCircularEndRunnable(circularConceal)
+                )
         )
 
         circularConceal.start()
@@ -87,26 +84,26 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
         mBinding.searchOpenView.visibility = View.VISIBLE
 
         val circularReveal = ViewAnimationUtils.createCircularReveal(
-            mBinding.searchOpenView,
-            (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
-            (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
-            0f, width.toFloat()
+                mBinding.searchOpenView,
+                (mBinding.searchViewOpenSearch.right + mBinding.searchViewOpenSearch.left) / 2,
+                (mBinding.searchViewOpenSearch.top + mBinding.searchViewOpenSearch.bottom) / 2,
+                0f, width.toFloat()
         )
 
         circularReveal.addListener(
-            ExtendedAnimatorListener(
-                null,
-                Runnable {
-                    isSearchOpen = true
+                ExtendedAnimatorListener(
+                        null,
+                        Runnable {
+                            isSearchOpen = true
 
-                    mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
-                    mBinding.searchViewInputText.requestFocus()
+                            mBinding.searchViewCloseSearch.setOnClickListener { closeSearch() }
+                            mBinding.searchViewInputText.requestFocus()
 
-                    val keyboard: InputMethodManager? =
-                        getSystemService(context, InputMethodManager::class.java)
-                    keyboard?.showSoftInput(mBinding.searchViewInputText, 0)
-                }
-            )
+                            val keyboard: InputMethodManager? =
+                                    getSystemService(context, InputMethodManager::class.java)
+                            keyboard?.showSoftInput(mBinding.searchViewInputText, 0)
+                        }
+                )
         )
         circularReveal.duration = 300
         circularReveal.start()
@@ -120,7 +117,7 @@ class CircularSearchView(context: Context, attrs: AttributeSet) : FrameLayout(co
         circularConceal.removeAllListeners()
 
         val keyboard: InputMethodManager? =
-            getSystemService(context, InputMethodManager::class.java)
+                getSystemService(context, InputMethodManager::class.java)
         keyboard?.hideSoftInputFromWindow(mBinding.searchViewInputText.windowToken, 0)
     }
 }

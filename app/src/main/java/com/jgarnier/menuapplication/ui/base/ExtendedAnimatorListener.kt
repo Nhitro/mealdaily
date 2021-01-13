@@ -3,7 +3,7 @@ package com.jgarnier.menuapplication.ui.base
 import android.animation.Animator
 
 /**
- *
+ * Utility class with the aim to avoid boiler plate when implementing [Animator.AnimatorListener]
  */
 open class ExtendedAnimatorListener(
         private val onStartRunnable: Runnable? = Runnable {},

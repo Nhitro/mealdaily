@@ -4,11 +4,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import java.util.function.Consumer
 
-
+/**
+ * Utility class with the aim to avoid boiler plate when using a [TextWatcher]
+ */
 class ExtendedTextWatcher(
-    private val mAfterTextChangedConsumer: Consumer<AfterTextChangedContainer>?,
-    private val mBeforeTextChangedConsumer: Consumer<BeforeTextChangedContainer>?,
-    private val mOnTextChangedConsumer: Consumer<OnTextChangedContainer>?
+        private val mAfterTextChangedConsumer: Consumer<AfterTextChangedContainer>?,
+        private val mBeforeTextChangedConsumer: Consumer<BeforeTextChangedContainer>?,
+        private val mOnTextChangedConsumer: Consumer<OnTextChangedContainer>?
 ) : TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {
@@ -24,17 +26,18 @@ class ExtendedTextWatcher(
     }
 
     data class AfterTextChangedContainer(val editable: Editable?)
+
     data class BeforeTextChangedContainer(
-        val charSequence: CharSequence?,
-        val start: Int,
-        val count: Int,
-        val after: Int
+            val charSequence: CharSequence?,
+            val start: Int,
+            val count: Int,
+            val after: Int
     )
 
     data class OnTextChangedContainer(
-        val charSequence: CharSequence?,
-        val start: Int,
-        val before: Int,
-        val count: Int
+            val charSequence: CharSequence?,
+            val start: Int,
+            val before: Int,
+            val count: Int
     )
 }

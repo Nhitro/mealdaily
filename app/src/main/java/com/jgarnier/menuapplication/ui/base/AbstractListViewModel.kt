@@ -19,6 +19,8 @@ import kotlinx.coroutines.flow.*
 abstract class AbstractListViewModel<T, U>(application: Application) :
         AndroidViewModel(application) {
 
+    // FIXME : Must migrate to StateFlow
+    // See https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html
     protected val mFilterObjectChannel = ConflatedBroadcastChannel<T>()
 
     private val mFetchedDataAfterFiltered =

@@ -40,24 +40,25 @@ class DishFragment : TransitionFragment(R.layout.fragment_dishes) {
         listenSearchTextChange()
 
         mViewModel.fetchedData.observe(
-            viewLifecycleOwner,
-            Observer { onFetchDataChanged(adapter, it) })
+                viewLifecycleOwner,
+                Observer { onFetchDataChanged(adapter, it) }
+        )
     }
 
     private fun listenSearchTextChange() {
         mBinding.dishesToolbar.addOnTextChangedListener(
-            ExtendedTextWatcher(
-                null,
-                null,
-                Consumer { mViewModel.updateSearchFilter(it.charSequence) }
-            )
+                ExtendedTextWatcher(
+                        null,
+                        null,
+                        Consumer { mViewModel.updateSearchFilter(it.charSequence) }
+                )
         )
     }
 
     private fun redirectOnFabClick() {
         mBinding.dishAddFab.setOnClickListener {
             val action =
-                DishesSearchFragmentDirections.actionDishesSearchFragmentToDishCreationFragment()
+                    DishesSearchFragmentDirections.actionDishesSearchFragmentToDishCreationFragment()
             findNavController().navigate(action)
         }
     }
@@ -67,8 +68,8 @@ class DishFragment : TransitionFragment(R.layout.fragment_dishes) {
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (mBinding.dishesToolbar.isSearchOpen
-                    && mBinding.dishesToolbar.isSearchTextIsEmpty()
-                    && newState == RecyclerView.SCROLL_STATE_DRAGGING
+                        && mBinding.dishesToolbar.isSearchTextIsEmpty()
+                        && newState == RecyclerView.SCROLL_STATE_DRAGGING
                 ) {
                     mBinding.dishesToolbar.closeSearch()
                 }
@@ -77,13 +78,18 @@ class DishFragment : TransitionFragment(R.layout.fragment_dishes) {
     }
 
     private fun onFetchDataChanged(
-        adapter: DishWithLineAdapter,
-        result: Result<List<DishWithLines>>
+            adapter: DishWithLineAdapter,
+            result: Result<List<DishWithLines>>
     ) {
         if (result is Result.Loading) {
-
+            mBinding.dishLoading.visibility = View.VISIBLE
+            mBinding.dishesSearchList.visibility = View.INVISIBLE
+            mBinding.dishAddFab.hide()
         } else {
             adapter.submitList(result.data)
+            mBinding.dishLoading.visibility = View.GONE
+            mBinding.dishesSearchList.visibility = View.VISIBLE
+            mBinding.dishAddFab.show()
         }
     }
 }

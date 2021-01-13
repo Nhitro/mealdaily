@@ -70,8 +70,11 @@ class PlanningViewModel @ViewModelInject constructor(
             mMealsSelected.remove(selectableMealWithDishes.mealWithDishes)
             if (mMealsSelected.isEmpty()) {
                 mIsDeletingMode.postValue(false)
+                // Reset the state of the list
+                mFilterObjectChannel.offer(mSelectedLocalDate.value!!)
             }
         }
+        mMealsSelectedNumber.postValue(mMealsSelected.size)
     }
 
     fun selectWeekView() = postTypeViewIfDifferent(WEEK_DAY_VIEW)

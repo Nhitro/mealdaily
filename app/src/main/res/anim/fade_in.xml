@@ -3,9 +3,9 @@
     android:interpolator="@android:anim/decelerate_interpolator">
 
     <alpha
-        android:duration="300"
+        android:duration="@android:integer/config_longAnimTime"
         android:fromAlpha="0"
-        android:startOffset="300"
+        android:startOffset="@android:integer/config_longAnimTime"
         android:toAlpha="1" />
 
 </set>

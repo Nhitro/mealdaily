@@ -66,8 +66,10 @@ class DishCreationFragment : TransitionFragment(R.layout.fragment_dish_creation)
 
         if (!nameInput.text.isNullOrBlank()) {
             mViewModel.saveDish(nameInput.text.toString(), mBinding.dishCreationLinkInput.text)
+            nameInput.error = null
         } else {
-            nameInput.error = " "
+            // TODO : Move this string to strings.xml
+            nameInput.error = "Ce champ ne peut être vide"
         }
     }
 

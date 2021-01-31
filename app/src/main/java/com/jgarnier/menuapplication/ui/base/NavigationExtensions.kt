@@ -26,6 +26,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jgarnier.menuapplication.R
 
 /**
  * Manages the various graphs needed for a [BottomNavigationView].
@@ -113,12 +114,12 @@ fun BottomNavigationView.setupWithNavController(
                     // Commit a transaction that cleans the back stack and adds the first fragment
                     // to it, creating the fixed started destination.
                     fragmentManager.beginTransaction()
-                            /*.setCustomAnimations(
-                                R.anim.fade_in,
-                                R.anim.fade_out,
-                                R.anim.fade_in,
-                                R.anim.fade_out
-                            )*/
+                            .setCustomAnimations(
+                                    R.anim.fade_in,
+                                    R.anim.fade_out,
+                                    R.anim.fade_in,
+                                    R.anim.fade_out
+                            )
                             .attach(selectedFragment)
                             .setPrimaryNavigationFragment(selectedFragment)
                             .apply {

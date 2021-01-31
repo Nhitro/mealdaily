@@ -16,6 +16,8 @@ abstract class TransitionFragment(layoutId: Int): Fragment(layoutId) {
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // FIXME : Clashes with the Navigation Extension fix
+        // Overlaps occur between different bottom navigation tabs
         ViewCompat.setTranslationZ(view, parentFragmentManager.backStackEntryCount.toFloat())
     }
 

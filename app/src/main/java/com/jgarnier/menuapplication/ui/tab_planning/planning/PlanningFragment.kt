@@ -14,7 +14,6 @@ import com.jgarnier.menuapplication.databinding.FragmentPlanningBinding
 import com.jgarnier.menuapplication.ui.base.BottomNavigationBarManager
 import com.jgarnier.menuapplication.ui.base.TransitionFragment
 import com.jgarnier.menuapplication.ui.base.setLocalDate
-import com.jgarnier.menuapplication.ui.tab_planning.PlanningFragmentDirections
 import com.jgarnier.menuapplication.ui.tab_planning.planning.PlanningViewModel.Companion.CALENDAR_VIEW
 import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.MealsAdapter
 import com.jgarnier.menuapplication.ui.tab_planning.planning.meals.MealsMoveCallback
@@ -226,6 +225,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
     private fun observeIsDeletingMode() = Observer<Boolean> {
         with(mBinding.planningLayout) {
             if (it) {
+                mBinding.planningFab.hide()
                 if (mBinding.planningDaysCalendar.isVisible) {
                     setTransition(R.id.monthToDeleteMeal)
                 } else {
@@ -233,6 +233,7 @@ class PlanningFragment : TransitionFragment(R.layout.fragment_planning) {
                 }
                 transitionToEnd()
             } else {
+                mBinding.planningFab.show()
                 // When we have to go back from the deleting mode to normal mode
                 // Firstly, we have to play the animation from end to start
                 // Secondly, we have to change the deleting transition (according to the view mode,
